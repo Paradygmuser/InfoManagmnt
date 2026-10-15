@@ -1,0 +1,5 @@
+C:\Users\Enael\Documents\SharpDevelop Projects\test_moyenne\test_moyenne\bin\Debug\test_moyenne.exe
+C:\Users\Enael\Documents\SharpDevelop Projects\test_moyenne\test_moyenne\bin\Debug\test_moyenne.pdb
+C:\Users\Enael\Documents\SharpDevelop Projects\test_moyenne\test_moyenne\obj\Debug\test_moyenne.csprojResolveAssemblyReference.cache
+C:\Users\Enael\Documents\SharpDevelop Projects\test_moyenne\test_moyenne\obj\Debug\test_moyenne.exe
+C:\Users\Enael\Documents\SharpDevelop Projects\test_moyenne\test_moyenne\obj\Debug\test_moyenne.pdb

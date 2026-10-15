@@ -1,0 +1,24 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+# SharpDevelop 4.4
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LaRoulette", "LaRoulette\LaRoulette.csproj", "{0C387EE5-1675-4D48-AAA1-99F35993A7D8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "test-wavy", "test-wavy\test-wavy.csproj", "{AB2BDDFA-C786-40C0-8659-678BF7FD573D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0C387EE5-1675-4D48-AAA1-99F35993A7D8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0C387EE5-1675-4D48-AAA1-99F35993A7D8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0C387EE5-1675-4D48-AAA1-99F35993A7D8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0C387EE5-1675-4D48-AAA1-99F35993A7D8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AB2BDDFA-C786-40C0-8659-678BF7FD573D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AB2BDDFA-C786-40C0-8659-678BF7FD573D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AB2BDDFA-C786-40C0-8659-678BF7FD573D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AB2BDDFA-C786-40C0-8659-678BF7FD573D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+	EndGlobalSection
+EndGlobal

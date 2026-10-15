@@ -1,0 +1,7 @@
+package enael.eafc;
+
+public class MaxVolumeReachedException extends Exception{
+	public MaxVolumeReachedException(String message) {
+		super(message);
+	}
+}

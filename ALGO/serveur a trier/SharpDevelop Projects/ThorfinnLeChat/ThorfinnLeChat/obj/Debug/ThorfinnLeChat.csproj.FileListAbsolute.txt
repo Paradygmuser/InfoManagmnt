@@ -1,0 +1,5 @@
+C:\Users\Enael\Documents\SharpDevelop Projects\ThorfinnLeChat\ThorfinnLeChat\obj\Debug\ThorfinnLeChat.csprojResolveAssemblyReference.cache
+C:\Users\Enael\Documents\SharpDevelop Projects\ThorfinnLeChat\ThorfinnLeChat\bin\Debug\ThorfinnLeChat.exe
+C:\Users\Enael\Documents\SharpDevelop Projects\ThorfinnLeChat\ThorfinnLeChat\bin\Debug\ThorfinnLeChat.pdb
+C:\Users\Enael\Documents\SharpDevelop Projects\ThorfinnLeChat\ThorfinnLeChat\obj\Debug\ThorfinnLeChat.exe
+C:\Users\Enael\Documents\SharpDevelop Projects\ThorfinnLeChat\ThorfinnLeChat\obj\Debug\ThorfinnLeChat.pdb

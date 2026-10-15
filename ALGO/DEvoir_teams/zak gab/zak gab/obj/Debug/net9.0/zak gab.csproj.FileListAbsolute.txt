@@ -1,0 +1,14 @@
+/Users/emac/Documents/formation/Principe d'algo/DEvoir teams/zak gab/zak gab/bin/Debug/net9.0/zak gab
+/Users/emac/Documents/formation/Principe d'algo/DEvoir teams/zak gab/zak gab/bin/Debug/net9.0/zak gab.deps.json
+/Users/emac/Documents/formation/Principe d'algo/DEvoir teams/zak gab/zak gab/bin/Debug/net9.0/zak gab.runtimeconfig.json
+/Users/emac/Documents/formation/Principe d'algo/DEvoir teams/zak gab/zak gab/bin/Debug/net9.0/zak gab.dll
+/Users/emac/Documents/formation/Principe d'algo/DEvoir teams/zak gab/zak gab/bin/Debug/net9.0/zak gab.pdb
+/Users/emac/Documents/formation/Principe d'algo/DEvoir teams/zak gab/zak gab/obj/Debug/net9.0/zak gab.GeneratedMSBuildEditorConfig.editorconfig
+/Users/emac/Documents/formation/Principe d'algo/DEvoir teams/zak gab/zak gab/obj/Debug/net9.0/zak gab.AssemblyInfoInputs.cache
+/Users/emac/Documents/formation/Principe d'algo/DEvoir teams/zak gab/zak gab/obj/Debug/net9.0/zak gab.AssemblyInfo.cs
+/Users/emac/Documents/formation/Principe d'algo/DEvoir teams/zak gab/zak gab/obj/Debug/net9.0/zak gab.csproj.CoreCompileInputs.cache
+/Users/emac/Documents/formation/Principe d'algo/DEvoir teams/zak gab/zak gab/obj/Debug/net9.0/zak gab.dll
+/Users/emac/Documents/formation/Principe d'algo/DEvoir teams/zak gab/zak gab/obj/Debug/net9.0/refint/zak gab.dll
+/Users/emac/Documents/formation/Principe d'algo/DEvoir teams/zak gab/zak gab/obj/Debug/net9.0/zak gab.pdb
+/Users/emac/Documents/formation/Principe d'algo/DEvoir teams/zak gab/zak gab/obj/Debug/net9.0/zak gab.genruntimeconfig.cache
+/Users/emac/Documents/formation/Principe d'algo/DEvoir teams/zak gab/zak gab/obj/Debug/net9.0/ref/zak gab.dll

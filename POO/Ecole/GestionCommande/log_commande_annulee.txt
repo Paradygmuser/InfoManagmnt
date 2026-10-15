@@ -1,0 +1,14 @@
+la commande numero: PIZZ-006 n'a pas pu etre realiser car il manque des ingredient pour faire la pizza QUATREFROMAGGI
+la commande numero: PIZZ-011 n'a pas pu etre realiser car il manque des ingredient pour faire la pizza MILANO
+la commande numero: PIZZ-013 n'a pas pu etre realiser car il manque des ingredient pour faire la pizza MARGHERITA
+la commande numero: PIZZ-014 n'a pas pu etre realiser car il manque des ingredient pour faire la pizza VEGETARIANA
+la commande numero: PIZZ-016 n'a pas pu etre realiser car il manque des ingredient pour faire la pizza BARBECUE
+la commande numero: PIZZ-018 n'a pas pu etre realiser car il manque des ingredient pour faire la pizza VEGETARIANA
+la commande numero: PIZZ-019 n'a pas pu etre realiser car il manque des ingredient pour faire la pizza VEGETARIANA
+la commande numero: PIZZ-020 n'a pas pu etre realiser car il manque des ingredient pour faire la pizza VEGETARIANA
+la commande numero: PIZZ-021 n'a pas pu etre realiser car il manque des ingredient pour faire la pizza BARBECUE
+la commande numero: PIZZ-028 n'a pas pu etre realiser car il manque des ingredient pour faire la pizza VEGETARIANA
+la commande numero: PIZZ-034 n'a pas pu etre realiser car il manque des ingredient pour faire la pizza BARBECUE
+la commande numero: PIZZ-041 n'a pas pu etre realiser car il manque des ingredient pour faire la pizza FUNGI
+la commande numero: PIZZ-049 n'a pas pu etre realiser car il manque des ingredient pour faire la pizza MEXICANA
+la commande numero: PIZZ-050 n'a pas pu etre realiser car il manque des ingredient pour faire la pizza FUNGI

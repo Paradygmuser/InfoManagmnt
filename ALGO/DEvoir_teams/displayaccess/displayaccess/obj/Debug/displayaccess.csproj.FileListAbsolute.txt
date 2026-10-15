@@ -1,0 +1,6 @@
+/Users/emac/Documents/formation/Principe d'algo/DEvoir teams/displayaccess/displayaccess/obj/Debug/displayaccess.csproj.AssemblyReference.cache
+/Users/emac/Documents/formation/Principe d'algo/DEvoir teams/displayaccess/displayaccess/obj/Debug/displayaccess.csproj.CoreCompileInputs.cache
+/Users/emac/Documents/formation/Principe d'algo/DEvoir teams/displayaccess/displayaccess/bin/Debug/displayaccess.exe
+/Users/emac/Documents/formation/Principe d'algo/DEvoir teams/displayaccess/displayaccess/bin/Debug/displayaccess.pdb
+/Users/emac/Documents/formation/Principe d'algo/DEvoir teams/displayaccess/displayaccess/obj/Debug/displayaccess.exe
+/Users/emac/Documents/formation/Principe d'algo/DEvoir teams/displayaccess/displayaccess/obj/Debug/displayaccess.pdb

@@ -1,0 +1,5 @@
+C:\Users\Admin\Documents\SharpDevelop Projects\ttt\ttt\bin\Debug\ttt.exe
+C:\Users\Admin\Documents\SharpDevelop Projects\ttt\ttt\bin\Debug\ttt.pdb
+C:\Users\Admin\Documents\SharpDevelop Projects\ttt\ttt\obj\Debug\ttt.csprojResolveAssemblyReference.cache
+C:\Users\Admin\Documents\SharpDevelop Projects\ttt\ttt\obj\Debug\ttt.exe
+C:\Users\Admin\Documents\SharpDevelop Projects\ttt\ttt\obj\Debug\ttt.pdb

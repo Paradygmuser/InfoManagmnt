@@ -1,0 +1,5 @@
+C:\Users\Enael\Documents\SharpDevelop Projects\roulette-anese-withoutIO\roulette-anese-withoutIO\bin\Debug\roulette-anese-withoutIO.exe
+C:\Users\Enael\Documents\SharpDevelop Projects\roulette-anese-withoutIO\roulette-anese-withoutIO\bin\Debug\roulette-anese-withoutIO.pdb
+C:\Users\Enael\Documents\SharpDevelop Projects\roulette-anese-withoutIO\roulette-anese-withoutIO\obj\Debug\roulette-anese-withoutIO.csprojResolveAssemblyReference.cache
+C:\Users\Enael\Documents\SharpDevelop Projects\roulette-anese-withoutIO\roulette-anese-withoutIO\obj\Debug\roulette-anese-withoutIO.exe
+C:\Users\Enael\Documents\SharpDevelop Projects\roulette-anese-withoutIO\roulette-anese-withoutIO\obj\Debug\roulette-anese-withoutIO.pdb

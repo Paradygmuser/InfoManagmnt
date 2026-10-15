@@ -1,0 +1,6 @@
+/Users/emac/Documents/formation/Principe d'algo/DEvoir teams/devoiralgo 030124/exo 6/bin/Debug/exo_6.exe
+/Users/emac/Documents/formation/Principe d'algo/DEvoir teams/devoiralgo 030124/exo 6/bin/Debug/exo_6.pdb
+/Users/emac/Documents/formation/Principe d'algo/DEvoir teams/devoiralgo 030124/exo 6/obj/Debug/exo 6.csproj.AssemblyReference.cache
+/Users/emac/Documents/formation/Principe d'algo/DEvoir teams/devoiralgo 030124/exo 6/obj/Debug/exo 6.csproj.CoreCompileInputs.cache
+/Users/emac/Documents/formation/Principe d'algo/DEvoir teams/devoiralgo 030124/exo 6/obj/Debug/exo_6.exe
+/Users/emac/Documents/formation/Principe d'algo/DEvoir teams/devoiralgo 030124/exo 6/obj/Debug/exo_6.pdb

@@ -1,0 +1,6 @@
+/Users/emac/Documents/formation/Principe d'algo/DEvoir teams/devoiralgo 030124/devoiralgo 030124/bin/Debug/devoiralgo_030124.exe
+/Users/emac/Documents/formation/Principe d'algo/DEvoir teams/devoiralgo 030124/devoiralgo 030124/bin/Debug/devoiralgo_030124.pdb
+/Users/emac/Documents/formation/Principe d'algo/DEvoir teams/devoiralgo 030124/devoiralgo 030124/obj/Debug/devoiralgo 030124.csproj.AssemblyReference.cache
+/Users/emac/Documents/formation/Principe d'algo/DEvoir teams/devoiralgo 030124/devoiralgo 030124/obj/Debug/devoiralgo 030124.csproj.CoreCompileInputs.cache
+/Users/emac/Documents/formation/Principe d'algo/DEvoir teams/devoiralgo 030124/devoiralgo 030124/obj/Debug/devoiralgo_030124.exe
+/Users/emac/Documents/formation/Principe d'algo/DEvoir teams/devoiralgo 030124/devoiralgo 030124/obj/Debug/devoiralgo_030124.pdb

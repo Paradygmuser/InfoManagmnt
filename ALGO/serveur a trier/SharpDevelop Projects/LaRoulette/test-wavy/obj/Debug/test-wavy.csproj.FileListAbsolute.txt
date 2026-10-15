@@ -1,0 +1,5 @@
+C:\Users\Enael\Documents\SharpDevelop Projects\LaRoulette\test-wavy\bin\Debug\test-wavy.exe
+C:\Users\Enael\Documents\SharpDevelop Projects\LaRoulette\test-wavy\bin\Debug\test-wavy.pdb
+C:\Users\Enael\Documents\SharpDevelop Projects\LaRoulette\test-wavy\obj\Debug\test-wavy.csprojResolveAssemblyReference.cache
+C:\Users\Enael\Documents\SharpDevelop Projects\LaRoulette\test-wavy\obj\Debug\test-wavy.exe
+C:\Users\Enael\Documents\SharpDevelop Projects\LaRoulette\test-wavy\obj\Debug\test-wavy.pdb

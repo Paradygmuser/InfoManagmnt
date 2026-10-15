@@ -1,0 +1,5 @@
+C:\Users\Enael\Documents\SharpDevelop Projects\LaRoulette\LaRoulette\obj\Debug\LaRoulette.csprojResolveAssemblyReference.cache
+C:\Users\Enael\Documents\SharpDevelop Projects\LaRoulette\LaRoulette\bin\Debug\LaRoulette.exe
+C:\Users\Enael\Documents\SharpDevelop Projects\LaRoulette\LaRoulette\bin\Debug\LaRoulette.pdb
+C:\Users\Enael\Documents\SharpDevelop Projects\LaRoulette\LaRoulette\obj\Debug\LaRoulette.exe
+C:\Users\Enael\Documents\SharpDevelop Projects\LaRoulette\LaRoulette\obj\Debug\LaRoulette.pdb

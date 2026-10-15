@@ -1,0 +1,5 @@
+C:\Users\Enael\Documents\SharpDevelop Projects\zak_roulette\zak_roulette\bin\Debug\zak_roulette.exe
+C:\Users\Enael\Documents\SharpDevelop Projects\zak_roulette\zak_roulette\bin\Debug\zak_roulette.pdb
+C:\Users\Enael\Documents\SharpDevelop Projects\zak_roulette\zak_roulette\obj\Debug\zak_roulette.csprojResolveAssemblyReference.cache
+C:\Users\Enael\Documents\SharpDevelop Projects\zak_roulette\zak_roulette\obj\Debug\zak_roulette.exe
+C:\Users\Enael\Documents\SharpDevelop Projects\zak_roulette\zak_roulette\obj\Debug\zak_roulette.pdb

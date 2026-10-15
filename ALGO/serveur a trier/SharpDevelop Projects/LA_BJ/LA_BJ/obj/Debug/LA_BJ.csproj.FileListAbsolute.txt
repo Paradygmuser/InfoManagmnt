@@ -1,0 +1,5 @@
+C:\Users\Enael\Documents\SharpDevelop Projects\LA_BJ\LA_BJ\obj\Debug\LA_BJ.csprojResolveAssemblyReference.cache
+C:\Users\Enael\Documents\SharpDevelop Projects\LA_BJ\LA_BJ\bin\Debug\LA_BJ.exe
+C:\Users\Enael\Documents\SharpDevelop Projects\LA_BJ\LA_BJ\bin\Debug\LA_BJ.pdb
+C:\Users\Enael\Documents\SharpDevelop Projects\LA_BJ\LA_BJ\obj\Debug\LA_BJ.exe
+C:\Users\Enael\Documents\SharpDevelop Projects\LA_BJ\LA_BJ\obj\Debug\LA_BJ.pdb

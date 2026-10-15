@@ -1,0 +1,6 @@
+/Users/emac/Documents/formation/Principe d'algo/DEvoir teams/ConsoleApplication2/ConsoleApplication2/obj/Debug/ConsoleApplication2.csproj.AssemblyReference.cache
+/Users/emac/Documents/formation/Principe d'algo/DEvoir teams/ConsoleApplication2/ConsoleApplication2/obj/Debug/ConsoleApplication2.csproj.CoreCompileInputs.cache
+/Users/emac/Documents/formation/Principe d'algo/DEvoir teams/ConsoleApplication2/ConsoleApplication2/bin/Debug/ConsoleApplication2.exe
+/Users/emac/Documents/formation/Principe d'algo/DEvoir teams/ConsoleApplication2/ConsoleApplication2/bin/Debug/ConsoleApplication2.pdb
+/Users/emac/Documents/formation/Principe d'algo/DEvoir teams/ConsoleApplication2/ConsoleApplication2/obj/Debug/ConsoleApplication2.exe
+/Users/emac/Documents/formation/Principe d'algo/DEvoir teams/ConsoleApplication2/ConsoleApplication2/obj/Debug/ConsoleApplication2.pdb

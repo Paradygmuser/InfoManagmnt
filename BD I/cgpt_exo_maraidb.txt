@@ -1,0 +1,88 @@
+1//
+CREATE VIEW Vue_Departement_Projet AS
+(SELECT D.nom, P.nomprojet, LD.localisation FROM Departement D
+    JOIN Projet P on D.numerodept = P.numerodept
+        JOIN localisation_Departement LD ON LD.numerodept= D.numerodept
+    GROUP BY P.numeroprojet
+        HAVING  COUNT(P.numeroprojet)>=1);
+
+SELECT * FROM Vue_Departement_Projet;
+
+2//
+
+CREATE INDEX TS_enss_nprojet ON Travaille_sur(enss,numeroprojet);
+3//
+UPDATE  Employe
+SET salaire=45000
+WHERE nss=333445555;
+
+SELECT * FROM Employe;
+
+4//
+SELECT nom,prenom,HEURES FROM Employe
+JOIN Travaille_sur Ts on Employe.nss = Ts.enss
+JOIN Projet P on P.numerodept=deptnr
+WHERE P.numeroprojet=10;
+
+5//
+//il faut rajouter DELETE ON CASCADE et update ON CASCADE pour le faire
+    DELETE FROM Employe
+        where nss IN (SELECT enss from Travaille_sur
+                                  where numeroprojet is null)
+6//
+        SHOW CREATE  TABLE Departement;
+//la reponse C employe
+
+7//
+CREATE VIEW vue_employe_ancien AS
+(
+SELECT nom,prenom,datenaissance,salaire FROM Employe
+    WHERE TIMESTAMPDIFF(year , datenaissance, NOW())>=50   );
+
+SELECT * FROM vue_employe_ancien;
+
+8//
+SELECT D.nom, AVG(E.salaire) AS salaire_moyen FROM Employe E
+JOIN Departement D on E.deptnr = D.numerodept
+GROUP BY D.nom ;
+
+SHOW CREATE TABLE localisation_Departement;
+
+
+//9
+UPDATE Employe
+SET adresse='Avenue de l\'europe'
+WHERE nss=987654321;
+
+SELECT * FROM Employe;
+
+//10
+
+Réponse C
+
+//
+CREATE  VIEW vue_employe_projet as
+    (select E.prenom,E.nom,P.nomprojet,TS.HEURES FROM employe E
+        JOIN Travaille_sur Ts on E.nss = Ts.enss
+        JOIN Projet P ON P.numerodept=E.deptnr
+        GROUP BY P.numeroprojet);
+
+//12
+DELETE FROM Employe
+WHERE nss in (SELECT enss FROM Travaille_sur
+                          JOIN Projet P on Travaille_sur.numeroprojet = P.numeroprojet
+                          WHERE heures >=10
+                          GROUP BY P.numeroprojet
+                          HAVING  COUNT(P.numeroprojet)>=1);
+
+//13
+CREATE INDEX employe_nom
+ON employe(nom);
+
+//14
+ALTER TABLE Employe
+MODIFY salaire INT
+CHECK ( salaire>=20000 );
+
+//15
+C relation multiple.

@@ -1,0 +1,14 @@
+/Users/emac/Documents/formation/Principe d'algo/DEvoir teams/anese gab/anese gab/bin/Debug/net9.0/anese gab
+/Users/emac/Documents/formation/Principe d'algo/DEvoir teams/anese gab/anese gab/bin/Debug/net9.0/anese gab.deps.json
+/Users/emac/Documents/formation/Principe d'algo/DEvoir teams/anese gab/anese gab/bin/Debug/net9.0/anese gab.runtimeconfig.json
+/Users/emac/Documents/formation/Principe d'algo/DEvoir teams/anese gab/anese gab/bin/Debug/net9.0/anese gab.dll
+/Users/emac/Documents/formation/Principe d'algo/DEvoir teams/anese gab/anese gab/bin/Debug/net9.0/anese gab.pdb
+/Users/emac/Documents/formation/Principe d'algo/DEvoir teams/anese gab/anese gab/obj/Debug/net9.0/anese gab.GeneratedMSBuildEditorConfig.editorconfig
+/Users/emac/Documents/formation/Principe d'algo/DEvoir teams/anese gab/anese gab/obj/Debug/net9.0/anese gab.AssemblyInfoInputs.cache
+/Users/emac/Documents/formation/Principe d'algo/DEvoir teams/anese gab/anese gab/obj/Debug/net9.0/anese gab.AssemblyInfo.cs
+/Users/emac/Documents/formation/Principe d'algo/DEvoir teams/anese gab/anese gab/obj/Debug/net9.0/anese gab.csproj.CoreCompileInputs.cache
+/Users/emac/Documents/formation/Principe d'algo/DEvoir teams/anese gab/anese gab/obj/Debug/net9.0/anese gab.dll
+/Users/emac/Documents/formation/Principe d'algo/DEvoir teams/anese gab/anese gab/obj/Debug/net9.0/refint/anese gab.dll
+/Users/emac/Documents/formation/Principe d'algo/DEvoir teams/anese gab/anese gab/obj/Debug/net9.0/anese gab.pdb
+/Users/emac/Documents/formation/Principe d'algo/DEvoir teams/anese gab/anese gab/obj/Debug/net9.0/anese gab.genruntimeconfig.cache
+/Users/emac/Documents/formation/Principe d'algo/DEvoir teams/anese gab/anese gab/obj/Debug/net9.0/ref/anese gab.dll

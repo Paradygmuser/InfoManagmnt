@@ -1,0 +1,55 @@
+﻿using System;
+using System.Collections.Generic;
+
+namespace Euromilion
+{
+    internal class Program
+    {
+        static List<int> nombres = new List<int>(); // attriubuts?
+        static List<int> etoiles = new List<int>(); //attributs?
+        private static Random rand = new Random();
+
+        public static void Main(string[] args)
+        {
+            GrilleNombres();
+            for (int h = 0, u=1 ; h < nombres.Count ;u++, h++)
+            {
+                Console.Write(nombres[h] + " "); //si on veut ecrire de maniere aleatoire ca serait Console.Write(rand(nombres[h])
+                
+                if (u%5==0)
+                {
+                    
+                    //Console.Write(u);
+                    Console.WriteLine();
+                }
+                
+            }
+            GrilleEtoiles();
+            for (int m = 0, v=1 ; m < etoiles.Count ;v++, m++)
+            {
+                Console.Write(etoiles[m] +"*" +" "); //si on veut ecrire de maniere aleatoire ca serait Console.Write(rand(etoiles[h])
+                
+                if (v %6==0)
+                {
+                   
+                    Console.WriteLine();
+                } 
+            }
+        }
+        public static void GrilleNombres()
+        {
+            for (int i = 1; i <= 50; i++) // j'ai mis l'initialisation de i car je ne souhaitais pas de '0' dans la grille
+            {
+                nombres.Add(i);
+            }
+        }
+
+        public static void GrilleEtoiles()
+        {
+            for (int i = 1; i <= 12; i++) // j'ai mis l'initialisation de i car je ne souhaitais pas de '0' dans la grille
+            {
+                etoiles.Add(i);
+            }
+        }
+    }
+}

@@ -1,0 +1,6 @@
+/Users/emac/Documents/formation/Principe d'algo/DEvoir teams/troisphrase/troisphrase/bin/Debug/troisphrase.exe
+/Users/emac/Documents/formation/Principe d'algo/DEvoir teams/troisphrase/troisphrase/bin/Debug/troisphrase.pdb
+/Users/emac/Documents/formation/Principe d'algo/DEvoir teams/troisphrase/troisphrase/obj/Debug/troisphrase.csproj.AssemblyReference.cache
+/Users/emac/Documents/formation/Principe d'algo/DEvoir teams/troisphrase/troisphrase/obj/Debug/troisphrase.csproj.CoreCompileInputs.cache
+/Users/emac/Documents/formation/Principe d'algo/DEvoir teams/troisphrase/troisphrase/obj/Debug/troisphrase.exe
+/Users/emac/Documents/formation/Principe d'algo/DEvoir teams/troisphrase/troisphrase/obj/Debug/troisphrase.pdb

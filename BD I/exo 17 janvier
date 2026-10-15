@@ -1,0 +1,62 @@
+SELECT * FROM Employe E
+WHERE E.deptnr=
+(SELECT D.numerodept FROM Departement D
+WHERE D.nom='Recherche');
+
+2/
+
+SELECT * FROM Projet P
+WHERE P.numerodept =
+(SELECT D.numerodept FROM Departement D
+WHERE D.nom= 'Recherche')
+  AND
+(SELECT D2.numerodept FROM Departement D2
+WHERE  D2.nom = 'Quartiers generaux');
+
+3/
+WHERE E.deptnr=
+      (SELECT D.numerodept FROM Departement D WHERE D.nom='Recherche')
+AND E.nss IN
+    (SELECT TS.enss FROM Travaille_sur TS WHERE TS.numeroprojet=
+        (SELECT P.numeroprojet FROM Projet P WHERE P.nomprojet='ProduitX'));
+
+PS: le code à la base était avec écrit avec "=" mais apres quelque recherche 
+j'ai vu qu'il fallait utilisé IN car lorsque je mettais avec égale, 
+la réponse de mariaDB disait que j'avais plus d'une ligne(Subquery returns more than 1 row)
+, j'ai compris alors que quand on fait WHERE attribut = c'est pour une seul valeur unique ...
+
+4/
+SELECT E.nom,E.prenom FROM Employe E
+WHERE E.nss IN
+      (SELECT TS.enss FROM Travaille_sur TS
+        WHERE TS.numeroprojet
+        IN
+        (SELECT P.numeroprojet FROM Projet P
+        WHERE P.localisationProjet ='Bruxelles')
+        );
+
+6/
+
+CREATE TABLE Voiture
+(
+num_plaque VARCHAR(10) NOT NULL,
+marque VARCHAR(20) NOT NULL,
+date_entre DATE NOT NULL ,
+nss_conducteur INTEGER NOT NULL,
+salaraire_min INTEGER DEFAULT 30000,
+
+PRIMARY KEY (num_plaque),
+FOREIGN KEY (nss_conducteur) REFERENCES Employe(nss)
+);
+
+
+ALTER TABLE Voiture
+CHANGE salaraire_min min_salaire DECIMAL(10,3) DEFAULT (30000);
+
+
+INSERT INTO Voiture(marque,date_entre,min_salaire,num_plaque)
+VALUES ('Ford', 19890218,  3500, 'XIT-988'),
+       ('Toyota', 19920328,  2100, 'SAM-010'),
+       ('BMW', 19930424,  6300, 'BOS-666'),
+       ('Mitsubishi', 19980123,  2435, 'EXP-999'),
+       ('Renault', 19930913,  3120.592, 'FRA-000');

@@ -1,0 +1,5 @@
+C:\Users\Enael\Documents\SharpDevelop Projects\bataille_zak_exam\bataille_zak_exam\bin\Debug\bataille_zak_exam.exe
+C:\Users\Enael\Documents\SharpDevelop Projects\bataille_zak_exam\bataille_zak_exam\bin\Debug\bataille_zak_exam.pdb
+C:\Users\Enael\Documents\SharpDevelop Projects\bataille_zak_exam\bataille_zak_exam\obj\Debug\bataille_zak_exam.csprojResolveAssemblyReference.cache
+C:\Users\Enael\Documents\SharpDevelop Projects\bataille_zak_exam\bataille_zak_exam\obj\Debug\bataille_zak_exam.exe
+C:\Users\Enael\Documents\SharpDevelop Projects\bataille_zak_exam\bataille_zak_exam\obj\Debug\bataille_zak_exam.pdb

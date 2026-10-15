@@ -1,0 +1,84 @@
+SELECT DISTINCT E.nom,E.prenom FROM Employe E 
+JOIN Departement D ON D.numerodept=E.deptnr
+JOIN Projet P ON P.numerodept=E.deptnr
+JOIN Travaille_sur TS ON TS.enss=E.nss
+WHERE D.nom='Recherche' OR P.nomprojet='Produit X'
+AND TS.HEURES>6;
+
+
+SELECT E.nom,E.prenom FROM Employe E 
+INNER JOIN Projet P ON E.deptnr=P.numerodept 
+WHERE P.localisationProjet ='Bruxelles'
+
+SELECT E.nom,E.prenom FROM Employe E 
+JOIN Projet P ON E.deptnr=P.numerodept
+WHERE P.localisationProjet='Bruxelles' 
+AND E.nss
+NOT IN
+(SELECT TS.enss FROM Travaille_sur TS 
+Join Projet P ON TS.numeroprojet=P.numeroprojet 
+ WHERE P.localisationprojet !='Bruxelles');
+ 
+ SELECT DISTINCT E.nom,E.prenom FROM Employe E
+ Join Projet P ON E.deptnr =P.numerodept 
+ WHERE P.localisationprojet !='Bruxelles'
+ AND E.nss
+ NOT IN
+(SELECT TS.enss FROM Travaille_sur TS
+ JOIN Projet P ON TS.numeroprojet=P.numeroprojet
+ WHERE P.localisationProjet='Bruxelles');
+
+SELECT E.nom,E.prenom FROM Employe E
+JOIN Travaille_sur TS ON E.nss=TS.enss
+WHERE TS.numeroprojet
+AND E.nss
+IN (SELECT P.numeroprojet FROM Projet P);
+
+SELECT E.nom,E.prenom FROM Employe E
+JOIN Travaille_sur TS ON E.nss=TS.enss
+WHERE TS.numeroprojet=MAX;
+
+SELECT E.nom,E.prenom FROM Employe E
+JOIN Travaille_sur TS ON E.nss=TS.enss
+WHERE TS.numeroprojet
+SELECT COUNT(TS.numeroprojet) FROM Travaille_sur TS AS nbrprojet
+
+SELECT E.nom,E.prenom FROM Employe
+JOIN Travaille_sur ON TS.enss=E.nss
+GROUP BY E.nss
+WHERE TS.numeroprojet=
+(SELECT COUNT(*) 
+FROM (SELECT TS.numeroprojet FROM Travaille_sur TS GROUP BY TS.numeroprojet) AS ProjetDif)
+AS nbreprojet);
+
+
+SELECT COUNT(*)  
+FROM 
+(SELECT TS.numeroprojet FROM Travaille_sur TS GROUP BY TS.numeroprojet) 
+AS ProjetDif;
+
+SELECT E.nom FROM Employe E 
+JOIN Travaille_sur TS ON E.nss=TS.enss 
+GROUP BY E.nss 
+HAVING COUNT(TS.numeroprojet)= 
+(SELECT COUNT(TS2.numeroprojet)
+ FROM Travaille_sur TS2);
+AS nbreprojet;
+ 
+ SELECT E.nom FROM Employe E 
+JOIN Travaille_sur TS ON E.nss=TS.enss 
+GROUP BY E.nss 
+HAVING COUNT(TS.numeroprojet)=
+ (SELECT COUNT(*)FROM (SELECT TS.numeroprojet FROM Travaille_sur TS GROUP BY TS.numeroprojet) AS nbrprojet);
+
+SELECT E.nom,E.prenom FROM Employe E
+WHERE E.salaire >=
+(SELECT AVG (E.salaire) FROM Employe E);
+
+
+SELECT COUNT(TS.enss),SUM(TS.HEURES),TS.numeroprojet 
+FROM Travaille_sur TS
+GROUP BY TS.numeroprojet;
+
+SELECT MAX(E.salaire) FROM Employe E;
+ 

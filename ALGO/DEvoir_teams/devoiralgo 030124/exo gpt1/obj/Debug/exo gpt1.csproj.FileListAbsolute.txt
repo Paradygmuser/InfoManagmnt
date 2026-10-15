@@ -1,0 +1,6 @@
+/Users/emac/Documents/formation/Principe d'algo/DEvoir teams/devoiralgo 030124/exo gpt1/obj/Debug/exo gpt1.csproj.AssemblyReference.cache
+/Users/emac/Documents/formation/Principe d'algo/DEvoir teams/devoiralgo 030124/exo gpt1/obj/Debug/exo gpt1.csproj.CoreCompileInputs.cache
+/Users/emac/Documents/formation/Principe d'algo/DEvoir teams/devoiralgo 030124/exo gpt1/bin/Debug/exo_gpt1.exe
+/Users/emac/Documents/formation/Principe d'algo/DEvoir teams/devoiralgo 030124/exo gpt1/bin/Debug/exo_gpt1.pdb
+/Users/emac/Documents/formation/Principe d'algo/DEvoir teams/devoiralgo 030124/exo gpt1/obj/Debug/exo_gpt1.exe
+/Users/emac/Documents/formation/Principe d'algo/DEvoir teams/devoiralgo 030124/exo gpt1/obj/Debug/exo_gpt1.pdb

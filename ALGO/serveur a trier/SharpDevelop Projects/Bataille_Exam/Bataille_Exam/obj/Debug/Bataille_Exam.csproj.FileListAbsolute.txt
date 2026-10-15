@@ -1,0 +1,5 @@
+C:\Users\Enael\Documents\SharpDevelop Projects\Bataille_Exam\Bataille_Exam\obj\Debug\Bataille_Exam.csprojResolveAssemblyReference.cache
+C:\Users\Enael\Documents\SharpDevelop Projects\Bataille_Exam\Bataille_Exam\bin\Debug\Bataille_Exam.exe
+C:\Users\Enael\Documents\SharpDevelop Projects\Bataille_Exam\Bataille_Exam\bin\Debug\Bataille_Exam.pdb
+C:\Users\Enael\Documents\SharpDevelop Projects\Bataille_Exam\Bataille_Exam\obj\Debug\Bataille_Exam.exe
+C:\Users\Enael\Documents\SharpDevelop Projects\Bataille_Exam\Bataille_Exam\obj\Debug\Bataille_Exam.pdb

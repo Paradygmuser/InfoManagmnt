@@ -1,0 +1,14 @@
+/Users/emac/Documents/formation/Principe d'algo/DEvoir teams/Battaille_Exam/Battaille_Exam/bin/Debug/net9.0/Battaille_Exam
+/Users/emac/Documents/formation/Principe d'algo/DEvoir teams/Battaille_Exam/Battaille_Exam/bin/Debug/net9.0/Battaille_Exam.deps.json
+/Users/emac/Documents/formation/Principe d'algo/DEvoir teams/Battaille_Exam/Battaille_Exam/bin/Debug/net9.0/Battaille_Exam.runtimeconfig.json
+/Users/emac/Documents/formation/Principe d'algo/DEvoir teams/Battaille_Exam/Battaille_Exam/bin/Debug/net9.0/Battaille_Exam.dll
+/Users/emac/Documents/formation/Principe d'algo/DEvoir teams/Battaille_Exam/Battaille_Exam/bin/Debug/net9.0/Battaille_Exam.pdb
+/Users/emac/Documents/formation/Principe d'algo/DEvoir teams/Battaille_Exam/Battaille_Exam/obj/Debug/net9.0/Battaille_Exam.GeneratedMSBuildEditorConfig.editorconfig
+/Users/emac/Documents/formation/Principe d'algo/DEvoir teams/Battaille_Exam/Battaille_Exam/obj/Debug/net9.0/Battaille_Exam.AssemblyInfoInputs.cache
+/Users/emac/Documents/formation/Principe d'algo/DEvoir teams/Battaille_Exam/Battaille_Exam/obj/Debug/net9.0/Battaille_Exam.AssemblyInfo.cs
+/Users/emac/Documents/formation/Principe d'algo/DEvoir teams/Battaille_Exam/Battaille_Exam/obj/Debug/net9.0/Battaille_Exam.csproj.CoreCompileInputs.cache
+/Users/emac/Documents/formation/Principe d'algo/DEvoir teams/Battaille_Exam/Battaille_Exam/obj/Debug/net9.0/Battaille_Exam.dll
+/Users/emac/Documents/formation/Principe d'algo/DEvoir teams/Battaille_Exam/Battaille_Exam/obj/Debug/net9.0/refint/Battaille_Exam.dll
+/Users/emac/Documents/formation/Principe d'algo/DEvoir teams/Battaille_Exam/Battaille_Exam/obj/Debug/net9.0/Battaille_Exam.pdb
+/Users/emac/Documents/formation/Principe d'algo/DEvoir teams/Battaille_Exam/Battaille_Exam/obj/Debug/net9.0/Battaille_Exam.genruntimeconfig.cache
+/Users/emac/Documents/formation/Principe d'algo/DEvoir teams/Battaille_Exam/Battaille_Exam/obj/Debug/net9.0/ref/Battaille_Exam.dll

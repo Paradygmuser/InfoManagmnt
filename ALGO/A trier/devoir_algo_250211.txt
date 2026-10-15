@@ -1,0 +1,41 @@
+*A quoi sert une méthode ?
+
+  une methode, ou Opperation est un(des) compretment(s) d'un objet typé.
+  exemple pour un moteur lors de son demarrage une serie d'instruction s'enchaine qui se repete dans
+  plusieurs algorythmes, ainsi definir une methode utilisé fait gagné du temps.
+
+  La methode peut etre appelé par tout objets, elle retournera un resultat du type de la methode
+  exemple methode split(), permet de separer des string en string, mais egalement un int si on disait
+  que le caractère '2' est la condition de split, il retournera des nombre separer mais en string et
+  plus en INT.
+
+  exemple :
+  -objet moteur, methode : (+) demarrer();
+  -une methode fait une serie d'instruction, avec l'analogie a la cuisine 
+  preparer une pate a pizza necessite une recette(serie d'instruction)
+  pour faire la pate pizza.
+  Faire une pate a pizza , peut etre utilisé pour faire une pizza italienne ou oriental, c'est la
+  meme pate
+
+*Donnez un exemple de méthode qui retourne un int qui est le carré d'un int reçu en paramètre.
+  public static int Carrex (int x) 
+    {
+      return x*x; // un carré est un nombre x multiplié par lui meme 
+    }
+---------------------------------------------------------------------------------------------------------
+..j'ai une question à ce sujet. j'ai chercher sur dotnet une operation d'exposant, mais pour C# je ne trouve 
+pas vraiment d'operateur directement.
+
+  public static int EXP ( int x , int y)
+    {
+      int cumul = x; 
+/* je tente de déclaré une variable int qui stockerais la valeur accumulé apres ma boucle suivante 
+*la valeur de départ ne peux pas etre egale a zero mais le x en parametre est-ce possible? ET si l'exposant egale à 0 la valeur cumul sera 1.*/
+      if (y==0) {
+      return 1;};
+      for (int i= 0;i<y;i++)
+        {
+          cumul = *x;// nous avons vu l'incrementation additionnate ou soustractive, existe-t-il un tel type d'incrementation multiplié par?
+        }
+      return cumul;
+    }

@@ -1,0 +1,21 @@
+Multiplier(2,5);
+--10
+
+public static int Multiplier(int premierfacteur, int deuxiemefacteur) //PascaleCase
+{
+int resultat = premierfacteur * deuxiemefacteur; -camelCase
+/*
+kjggljg
+llgljg
+klg
+*/
+
+
+return resultat;
+
+}
+
+public static void Concatener(string a, string b, string c)
+{
+  return a+b+c;
+}

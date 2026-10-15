@@ -1,0 +1,246 @@
+/*Question 0 :-- Exercice fait ce jeudi 24/04/2025
+-- Ci-dessous, une requête affichant le prénom, le nom et le dernier salaire des responsables de département.
+SELECT first_name, last_name, salary
+ FROM employees AS E
+   JOIN salaries AS S ON E.emp_no = S.emp_no
+   JOIN dept_manager DM ON E.emp_no = DM.emp_no
+   WHERE YEAR(S.to_date) = 9999;
+ 
+--  Au moyen d'une routine stockée, affichez les noms et prénoms des employés qui ont ou ont eu 
+le même salaire repris dans la liste fournie par la requête ci-dessus.*/
+
+-- SUBSTRING affiche moi a parti du int caractere
+-- MID(string,((- i je veux commencer a la fin du mot)|(+si je veux commencer au debut du mot) int apd de quel caratctere), un dernier int pour la ongueur de la chaine
+
+ /*
+# Créez une procédure qui crée ou met à jour une table « Results », 
+détaillée ci-dessous, sur base d’une liste de noms de département fournis en paramètre. 
+La table « Results » contient trois attributs :
+#   a.	Id : Clé primaire assurant l’unicité de chaque enregistrement ;
+#   b.  LaDate : Date d'insertion
+#   c.	NomDept : Nom du département
+#   d.	ListeEmployes : Chaine de caractères avec les prénoms et noms des employés le tout séparé par des virgules.
+CALL p_listing ('Recherche,Administration');
+SELECT * FROM results;
+# */
+
+DELIMITER §çç§
+CREATE OR REPLACE PROCEDURE p_listing ( v_listdept VARCHAR(255))
+BEGIN
+  DECLARE v_listeUtile VARCHAR(255) DEFAULT '';
+  DECLARE v_count INT DEFAULT 0; -- pour compter le nombre d'element dans la liste
+  DECLARE v_listnom VARCHAR(255) DEFAULT ''; -- pour y concatener avec concat_ws
+  DECLARE v_dept VARCHAR(255) DEFAULT '';
+  DECLARE v_nom, v_prenom VARCHAR(255) DEFAuLT ''; -- deux varaible nom et prenom utile au curseur
+  DECLARE v_fini BOOLEAN DEFAULT false;
+  /*declaration du curseur qui permetra de lire chaque nom et prenom de l'employé en vue de la concatenation*/
+  DECLARE c_pointeur CURSOR FOR SELECT prenom,E.nom FROM employe E JOIN departement D on deptnr=numerodept WHERE D.nom = v_dept;
+  DECLARE CONTINUE HANDLER FOR NOT FOUND SET v_fini=true;  
+  
+  /*creation de la table si elle n'existe pas*/
+  CREATE TABLE IF NOT EXISTS Results(
+  Id INT NOT NULL AUTO_INCREMENT PRIMARY KEY UNIQUE,
+  Ladate DATETIME NOT NULL,
+  NomDept VARCHAR(255) DEFAULT'',
+  ListeEmployees VARCHAR(255) DEFAULT''
+  );
+  /*Instructions*/
+  SET v_listeUtile=v_listdept;
+  SELECT LENGTH(v_listeUtile)-LENGTH(REPLACE(v_listeUtile,',',''))+1 INTO v_count; -- calclut moi le nombre d'eleent separer d'un virgule de la chaine sans les virgules 
+  
+  WHILE v_count>0 DO -- tant que se compteur est lus grand que zero DEBUT DE BOUCLE
+  /*reinitialisation des attribut de boucle*/
+  SET v_fini = FALSE ; -- pour réinitalisé a chaque boucle sinon le pointeur ne s'ouvre pas a la deuxieme boucle
+  SET v_listnom = ''; -- pour effacer les nom du departements precedent
+  /*instruction de boucle*/
+  SELECT SUBSTRING_INDEX (v_listeUtile,',',1) INTO v_dept; -- prend le premier mot de la liste dans la variable v_dept 
+  
+  /*Fetcheur*/
+    OPEN c_pointeur;
+      read_loop: LOOP
+        FETCH c_pointeur INTO v_prenom,v_nom;
+        IF v_fini THEN LEAVE read_loop;
+        END IF;
+        IF (SELECT LENGTH(v_listnom))>1 THEN
+        SELECT CONCAT_WS(',',v_listnom,CONCAT(v_prenom,' ',v_nom)) INTO v_listnom;-- concataine a la suite avec ',' la variable listnom et la concataination du fetch
+        ELSE 
+        SELECT CONCAT(v_prenom,' ',v_nom) INTO v_listnom;
+        END IF;
+      END LOOP; 
+    CLOSE c_pointeur;
+    /*insert dans le tableau les donnée : */
+    INSERT INTO Results(Ladate,NomDept,ListeEmployees)
+    VALUES(NOW(),v_dept,v_listnom);
+  
+  /*Ecrase le IN*/
+  SELECT MID(v_listeUtile,LENGTH(v_dept)+2) INTO v_listeUtile;
+  /*prend la chaine a partir de la fin de la longueur du premier mot dans la variable v_dept
+  il prendra jusqu'a la fin de la chaine mais commencera avec la dernier lettre sanss +1 et avec une virgule sans le +2,
+  Il ecrase le la variable par la nouvelle valeur
+  */
+  SET v_count= v_count-1; -- decrementation du count.   
+  END WHILE;
+END §çç§
+DELIMITER ;
+
+/*
+Voici un énoncé d'examen qui couvre plusieurs aspects de votre syllabus :
+---
+**EXAMEN - Programmation SQL Avancée**
+**Durée : 2h00**
+**Base de données :** Système de gestion d'une bibliothèque
+**Tables disponibles :**
+- `livre` (id_livre, titre, isbn, annee_publication, id_auteur, nb_exemplaires)
+- `auteur` (id_auteur, nom, prenom, nationalite)
+- `emprunt` (id_emprunt, id_livre, id_membre, date_emprunt, date_retour_prevue, date_retour_reelle)
+- `membre` (id_membre, nom, prenom, email, date_inscription, statut) -- statut : 'ACTIF', 'SUSPENDU'
+---
+*/
+CREATE DATABASE bibliotheque;
+CREATE TABLE livre(
+  id_livre INT AUTO_INCREMENT PRIMARY KEY UNIQUE,
+  titre VARCHAR(255) NOT NULL,
+  isbn INT NOT NULL,
+  annee_publication DATETIME(year),
+  id_auteur INT NOT NULL UNIQUE,
+  nb_exemplaires INT DEFAULt 0,
+  FOREIGN KEY (id_auteur) ON UPDATE CASCADE REFERENCES auteur
+);
+
+CREATE TABLE auteur(
+  id_auteur INT AUTO_INCREMENT PRIMARY KEY UNIQUE,
+  nom VARCHAR(255) NOT NULL,
+  prenom VARCHAR(255) NOT NULL,
+  nationalité VARCHAR(150) NOT NULL
+);
+
+CREATE TABLE emprunt (
+  id_emprunt INT PRIMARY KEY UNIQUE,
+  id_livre INT NOT NULL,
+  id_membre INT NOT NULL,
+  date_emprunt DATETIME DEFAULT '99-99-9999',
+  date_retour_prevue DATETIME DEFAULT '99-99-9999',
+  date_retour_reelle DATETIME DEFAULT '99-99-9999',
+  FOREIGN KEY(id_livre) ON UPDATE CASCADE REFERENCES livre,
+  FOREIGN KEY(id_membre) ON UPDATE CASCADE REFERENCES membre
+);
+
+CREATE TABLE membre(
+  id_membre INT PRIMARY KEY UNIQUE, 
+  nom VARCHAR(255) DEFAULT'', 
+  prenom VARCHAR(255) DEFAULT '', 
+  email VARCHAR(255) UNIQUE NOT NULL, 
+  date_inscription DATETIME NOT NULL, 
+  statut VARCHAR(50) DEFAULT 'ACTIF'
+);
+
+/*
+**Exercice 1 : Procédure stockée avec curseur (8 points)**
+Créez une procédure stockée `p_rapport_auteurs(v_nationalite VARCHAR(50))` qui :
+1. Crée une table temporaire `RapportAuteurs` si elle n'existe pas avec les colonnes :
+   - `id_rapport` (AUTO_INCREMENT PRIMARY KEY)
+   - `date_rapport` (DATETIME)
+   - `nationalite` (VARCHAR(50))
+   - `nom_auteur` (VARCHAR(100))
+   - `nb_livres_publies` (INT)
+   - `nb_emprunts_total` (INT)
+2. Pour chaque auteur de la nationalité donnée, calcule :
+   - Le nombre de livres qu'il a publiés
+   - Le nombre total d'emprunts de ses livres
+
+3. Insère ces données dans la table `RapportAuteurs`
+SELECT 
+  A.nom,
+  COUNT(DISTINCT L.id_livre) AS nb_livres,
+  COUNT(E.id_emprunt) AS nb_emprunts
+FROM auteur A
+LEFT JOIN livre L ON A.id_auteur = L.id_auteur
+LEFT JOIN emprunt E ON L.id_livre = E.id_livre
+WHERE A.nationalite = 'Britannique'
+GROUP BY A.id_auteur;
+
+DELIMITER §çç§
+CREATE OR REPLACE FUNCTION foreachelemnt(v_chain VARCHAR(200))
+RETURNS INTEGER
+BEGIN
+  IF LENGTH(v_chain)>0
+  THEN
+    RETURN LENGTH(v_chain) - LENGTH(REPLACE(v_chain, ',', '')) +1;
+  END IF;
+  RETURN 0;
+END §çç§
+DELIMITER ;
+
+*/
+DELIMITER §çç§
+CREATE OR REPLACE PROCEDURE p_rapport_auteurs (v_nationalite VARCHAR(50))
+  BEGIN
+  /*attributs, proprieté*/
+  DECLARE v_nom_auteur VARCHAR(100),
+  DECLARE v_count_pub INT,
+  DECLARE v_count_emp INT,
+  DECLARE c_pointeur_1 CURSOR FOR SELECT A.nom , COUNT(titre) FROM livre L  -- faux je peux faire un left join pour tout avoir en un seul pointeur
+    JOIN auteur A ON A.id_auteur=L.id_auteur
+    WHERE nationalite=v_nationalite GROUP BY L.id_auteur;
+  DECLARE c_pointeur_2 CURSOR FOR SELECT COUNT(id_emprunt) FROM emprunt E 
+    JOIN livre L ON L.id_livre=E.id_livre 
+    JOIN auteur A ON A.id_auteur=L.id_auteur 
+    WHERE A.nom=v_nom_auteur;
+  DECLARE v_fini DEFAULT false;
+  DECLARE CONTINUE HANDLER FOR NOT FOUND SET v_fini true;
+  /*Creation de la table -- je n'ai pas vu la creation de table teporaire bien que la suntaxe soit disponible sur mariadb*/
+  CREATE TABLE IF NOT EXISTS RapportAuteurs(
+    id_rapport INT PRIMARY KEY,
+    date_rapport DATE NOT NULL,
+    nationalite VARCHAR(50) NOT NULL,
+    nom_auteur VARCHAR (100) NOT NULL,
+    nb_livres_publies INT NOT NULL,
+    nb_emprunts_total INT, -- peut etre null  
+  );
+  /*instructions*/
+  OPEN c_pointeur_1;
+  open c_pointeur_2;
+  read_loop : LOOP
+    FETCH c_pointeur_1 INTO v_nom_auteur,v_count_pub;
+    FETCH c_pointeur_2 INTO v_count_emp;
+    IF v_fini 
+      THEN LEAVE read_loop;
+    END IF;
+    INSERT INTO RapportAuteurs(date_rapport,nationalite,nom_auteur,nb_livres_publies,nb_emprunts_total)
+    VALUES(NOW(),v_nationalite,v_nom_auteur,v_count_pub,v_count_emp);
+  END LOOP;
+  CLOSE c_pointeur_1;
+  CLOSE c_pointeur_2;
+  END §çç§
+DELIMITER ;
+/*
+**Exercice 2 : Déclencheur (6 points)**
+Créez un déclencheur `tr_verif_emprunt` qui s'active BEFORE INSERT sur la table `emprunt` et qui :
+1. Vérifie que le membre n'est pas suspendu
+2. Vérifie qu'il reste au moins un exemplaire disponible du livre
+3. Si l'une de ces conditions n'est pas respectée, génère une erreur avec `SIGNAL`
+*/
+
+/*
+**Exercice 3 : Transaction avec gestion d'erreur (6 points)**
+Créez une procédure `p_retour_livre(v_id_emprunt INT)` qui utilise une transaction pour :
+1. Mettre à jour la `date_retour_reelle` dans la table `emprunt`
+2. Incrémenter le `nb_exemplaires` dans la table `livre`
+3. Si le retour est en retard (date_retour_reelle > date_retour_prevue),
+   créer un enregistrement dans une table `penalite` avec les détails du membre et le nombre de jours de retard
+Gérez les erreurs avec ROLLBACK en cas de problème.
+---
+*/
+
+/*
+**Barème :**
+- Syntaxe correcte : 40%
+- Logique fonctionnelle : 40% 
+- Gestion des erreurs : 20%
+---
+Cet énoncé couvre les curseurs, procédures stockées, déclencheurs, transactions et gestion d'erreurs. Voulez-vous que je modifie quelque chose ou que je crée un autre type d'exercice ?
+*/
+
+
+
+

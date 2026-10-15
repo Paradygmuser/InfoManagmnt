@@ -1,0 +1,5 @@
+C:\Users\Enael\Documents\SharpDevelop Projects\bataillon\bataillon\obj\Debug\bataillon.csprojResolveAssemblyReference.cache
+C:\Users\Enael\Documents\SharpDevelop Projects\bataillon\bataillon\bin\Debug\bataillon.exe
+C:\Users\Enael\Documents\SharpDevelop Projects\bataillon\bataillon\bin\Debug\bataillon.pdb
+C:\Users\Enael\Documents\SharpDevelop Projects\bataillon\bataillon\obj\Debug\bataillon.exe
+C:\Users\Enael\Documents\SharpDevelop Projects\bataillon\bataillon\obj\Debug\bataillon.pdb

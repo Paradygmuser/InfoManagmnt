@@ -1,0 +1,5 @@
+C:\Users\Enael\Documents\SharpDevelop Projects\BlackJAck2\BlackJAck2\obj\Debug\BlackJAck2.csprojResolveAssemblyReference.cache
+C:\Users\Enael\Documents\SharpDevelop Projects\BlackJAck2\BlackJAck2\bin\Debug\BlackJAck2.exe
+C:\Users\Enael\Documents\SharpDevelop Projects\BlackJAck2\BlackJAck2\bin\Debug\BlackJAck2.pdb
+C:\Users\Enael\Documents\SharpDevelop Projects\BlackJAck2\BlackJAck2\obj\Debug\BlackJAck2.exe
+C:\Users\Enael\Documents\SharpDevelop Projects\BlackJAck2\BlackJAck2\obj\Debug\BlackJAck2.pdb

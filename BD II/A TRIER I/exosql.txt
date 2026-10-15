@@ -1,0 +1,99 @@
+-- Exercice fait ce jeudi 24/04/2025
+-- Ci-dessous, une requête affichant le prénom, le nom et le dernier salaire des responsables de département.
+SELECT first_name, last_name, salary
+ FROM employees AS E
+   JOIN salaries AS S ON E.emp_no = S.emp_no
+   JOIN dept_manager DM ON E.emp_no = DM.emp_no
+   WHERE YEAR(S.to_date) = 9999;
+ 
+--  Au moyen d'une routine stockée, affichez les noms et prénoms des employés qui ont ou ont eu 
+le même salaire repris dans la liste fournie par la requête ci-dessus.
+DELIMITER $
+CREATE OR REPLACE PROCEDURE myProc()
+ BEGIN
+   DECLARE v_Done BOOL DEFAULT FALSE;
+   DECLARE v_salaire INT DEFAULT 0 ;
+   DECLARE c_ListEmp CURSOR FOR
+     SELECT S.salary
+       FROM salaries S JOIN dept_manager DM ON S.emp_no = DM.emp_no
+       WHERE YEAR(S.to_date) = 9999;
+   DECLARE CONTINUE HANDLER FOR NOT FOUND SET v_DONE =TRUE;
+   OPEN c_ListEmp;
+   Read_LOOP: LOOP
+     FETCH c_ListEmp into v_salaire;
+     IF v_Done THEN LEAVE read_loop;
+     END IF;
+     SELECT E.first_name, E.last_name, S.salary
+       FROM Employees E JOIN Salaries S ON E.emp_no = S.emp_no
+       WHERE S.salary = v_salaire;
+  
+   END LOOP Read_LOOP;
+   CLOSE c_ListEmp;
+ 
+ END$
+DELIMITER ;
+ 
+-- Avec une requête préparée
+DELIMITER $
+CREATE OR REPLACE PROCEDURE myProc()
+ BEGIN
+   DECLARE v_Done BOOL DEFAULT FALSE;
+   DECLARE v_salaire INT DEFAULT 0 ;
+   DECLARE c_ListSAL CURSOR FOR
+     SELECT S.salary
+       FROM salaries S JOIN dept_manager DM ON S.emp_no = DM.emp_no
+       WHERE YEAR(S.to_date) = 9999;
+   DECLARE CONTINUE HANDLER FOR NOT FOUND SET v_DONE =TRUE;
+   PREPARE stmt FROM 'SELECT E.first_name, E.last_name, S.salary
+       FROM Employees E JOIN Salaries S ON E.emp_no = S.emp_no
+       WHERE S.salary = ? ';
+   OPEN c_ListSAL;
+   Read_LOOP: LOOP
+     FETCH c_ListSAL into v_salaire;
+     IF v_Done THEN LEAVE read_loop;
+     END IF;
+     EXECUTE stmt USING v_salaire;
+  
+   END LOOP Read_LOOP;
+   CLOSE c_ListSAL;
+   DEALLOCATE PREPARE stmt;
+ END$
+DELIMITER ;
+ 
+ 
+-- Avec les prénoms et noms des responsables de départements
+DELIMITER $
+CREATE OR REPLACE PROCEDURE myProc()
+ BEGIN
+   DECLARE v_Done BOOL DEFAULT FALSE;
+   DECLARE v_salaire INT DEFAULT 0 ;
+   DECLARE v_FN, v_LN VARCHAR(20);
+   DECLARE c_ListEmp CURSOR FOR
+     SELECT S.salary, E.first_name, E.last_name
+       FROM salaries S JOIN dept_manager DM ON S.emp_no = DM.emp_no
+         JOIN employees E ON s.emp_no = E.emp_no
+       WHERE YEAR(S.to_date) = 9999;
+   DECLARE CONTINUE HANDLER FOR NOT FOUND SET v_DONE =TRUE;
+   PREPARE stmt FROM 'SELECT E.first_name, E.last_name, S.salary,? ManagerFN,? ManagerLN
+       FROM Employees E JOIN Salaries S ON E.emp_no = S.emp_no
+       WHERE S.salary = ?';
+   OPEN c_ListEmp;
+   Read_LOOP: LOOP
+     FETCH c_ListEmp into v_salaire, v_FN, v_LN;
+     IF v_Done THEN LEAVE read_loop;
+     END IF;
+     EXECUTE stmt USING v_FN, v_LN, v_salaire;
+  
+   END LOOP Read_LOOP;
+   CLOSE c_ListEmp;
+   DEALLOCATE PREPARE stmt;
+ END$
+DELIMITER ;
+ 
+ 
+ 
+ 
+Pour ceux qui le veulent, veillez proposer une version de la requête affichant le dernier salaire des responsables de département sans hard-coder l'année de 9999.
+ 
+ 
+ SELECT first_name, last_name, salary

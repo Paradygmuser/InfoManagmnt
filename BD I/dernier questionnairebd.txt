@@ -1,0 +1,212 @@
+REPONSE
+SELECT E.nom,E.prenom,P.localisationProjet,TS.HEURES,COUNT(P.numeroprojet) FROM Employe E
+JOIN Travaille_sur Ts on E.nss = Ts.enss
+JOIN Projet P on P.numeroprojet = Ts.numeroprojet
+WHERE TS.HEURES>=10 AND P.localisationProjet='Bruxelles'
+GROUP BY E.nom
+HAVING COUNT(P.numeroprojet) >=1;
+
+****
+
+SELECT SUM(TS.heures) AS Totalheurfemme FROM Travaille_sur TS
+JOIN Lien L ON L.enss=TS.enss
+JOIN Projet P on Ts.numeroprojet = P.numeroprojet
+WHERE L.sexe='F' AND P.nomprojet='ProduitZ';
+
+******
+
+SELECT nom,prenom,nss FROM Employe E
+JOIN Travaille_sur TS ON TS.enss=E.nss
+JOIN Projet P on TS.numeroprojet = P.numeroprojet
+GROUP BY E.datenaissance DESC
+HAVING COUNT(P.numeroprojet)>=2;
+
+*****
+
+ALTER TABLE Departement
+ADD FOREIGN KEY (nssdirecteur) REFERENCES Employe(nss);
+SHOW CREATE TABLE Departement;
+ALTER TABLE Departement
+DROP FOREIGN KEY departement_ibfk_1;
+
+******
+
+SHOW CREATE TABLE Employe;
+ALTER TABLE Employe
+MODIFY salaire DECIMAL(11,2) DEFAULT NULL;
+
+****
+
+/*1.Supprimer la clef primaire de la table lien*/
+
+//il faudra pour ce faire effacé la clef etranger qui point sur l'attribut de la clef primaire a savoir 'enss'
+
+SHOW CREATE TABLE  Lien;
+
+ALTER TABLE Lien
+DROP FOREIGN KEY lien_ibfk_1;
+
+ALTER TABLE Lien
+DROP PRIMARY KEY ;
+
+
+/*2.recree une clef primaire(enss,nomdependant,datedenaissance*/
+
+//il faudra probalblement rajouté la clef etrangere sur l'attribut ensss qui pointe sur l'attribut nss de la table employe
+
+ALTER TABLE Lien
+ADD PRIMARY KEY (enss,nomdependant,datenaissance);
+ALTER TABLE Lien
+ADD FOREIGN KEY (enss) REFERENCES Employe(nss);
+
+*****
+
+SELECT AVG(E.salaire) AS salaire_moyen,D.nom,E.sexe FROM Employe E
+JOIN Departement D on D.numerodept = E.deptnr
+GROUP BY D.nom ASC, E.sexe;
+
+*****
+
+CREATE TABLE Voiture (
+    num_plaque VARCHAR(9) PRIMARY KEY ,
+    marque VARCHAR(20),
+    date_achat DATE ,
+    enss INT UNIQUE,
+    FOREIGN KEY (enss) REFERENCES Employe(nss),
+    CHECK ( enss IN (SELECT E.nss FROM  Employe E WHERE supernss IS NOT NULL ) )
+
+);
+
+****
+
+// il manquait ON DELETE CASCADE dans les table qui pocede une clef etrangere qui fait reference à l'attribut nss de la table Employe
+
+//proceder de modification de la clef etrangere , exemple pour la table travail_sur:
+
+SHOW CREATE TABLE Employe;
+
+ALTER TABLE Travaille_sur
+DROP FOREIGN KEY travaille_sur_ibfk_1;
+
+ALTER TABLE Travaille_sur
+ADD FOREIGN KEY (enss) REFERENCES Employe (nss)
+ON DELETE CASCADE ;
+
+
+//maintenant on peut supprimé la ligne employe avec le nss 123456789
+
+
+
+DELETE FROM Employe
+WHERE nss = 123456789;
+
+*****
+
+UPDATE Projet
+SET localisationProjet = 'Namur',numerodept=1 WHERE nomprojet = (
+SELECT nomprojet FROM Projet
+WHERE nomprojet LIKE '% %');
+
+****
+
+ALTER TABLE Projet
+ADD INDEX(nomprojet ASC,localisationProjet DESC ) ;
+
+****
+
+INSERT INTO Departement
+VALUES ('Laboratoire',9,976431852,19960521),
+('Entrepot',11,258741963,19940421);
+
+****
+
+CREATE VIEW NPSAD AS
+SELECT
+    E.nom,E.prenom,
+    (SELECT E.salaire*1.25 GROUP BY E.nss DESC LIMIT 10) AS salaire_dollar,
+    D.nom AS nomdepartement,
+    (SELECT TIMESTAMPDIFF(year,E.datenaissance,now())) AS age
+FROM Employe E
+JOIN Departement D on D.numerodept = E.deptnr;
+
+****
+
+SELECT E.ville FROM Employe E
+               JOIN Travaille_sur TS ON TS.enss=E.nss
+GROUP BY E.ville,TS.numeroprojet
+HAVING COUNT(E.nss)>=2 AND COUNT(TS.numeroprojet)>=2;
+
+****
+
+ALTER TABLE Departement
+ADD Pays VARCHAR(20) DEFAULT 'Belgique';
+
+****
+
+***
+
+SELECT P.nomprojet,TS.heures FROM Projet P
+JOIN Travaille_sur Ts on P.numeroprojet = Ts.numeroprojet
+JOIN Employe E on E.nss = Ts.enss
+WHERE E.nom='Durand' AND E.prenom='Roger';
+
+****
+
+ALTER TABLE Departement
+ADD Pays VARCHAR(20) DEFAULT 'Belgique';
+
+***
+
+SELECT nom,prenom FROM Employe
+WHERE supernss IS NULL;
+***
+UPDATE Employe
+SET salaire=salaire*1.1
+WHERE sexe='F';
+*****
+DROP TABLE Lien;
+****
+SELECT E.nss,E.adresse,E.datenaissance FROM Employe E
+WHERE E.deptnr=4 OR E.deptnr=5;
+***SELECT E.nom,E.adresse FROM Employe E
+JOIN Departement D on E.deptnr = D.numerodept
+WHERE D.nom='Recherche';
+****
+1.VARCHAR entre single quote
+
+2. valeur impossible : un varaibale decimale s'ecrit Entier.(POINT)Decimal et non virgule
+
+3Valeur impossible on pourrai ecrire 30 jan 2014 sans le point
+
+4valeur impossible il aurait fallut ecrir 'A\'14,3' si la donné est une VARCHAR avec le single quote
+
+5Valide, VARCHAR
+
+7valeur impossible il faut les single quote '2016-01-28'
+
+8valeur impossible si precedé de TIME ca serait une valeur pour la longueur de 56heur et 75minute, il n'y a pas de doute le format de time s'ecrit D(jour-day)(espace)(heures):(minutes):(secondes), ici les 75 sont au dessus des 60 minutes comprise dans une heures
+
+9 valeur impossible pour une donné, mais valeur permise en DDL
+
+10valeur permise pour donnée VARCHAR
+
+11 INT?
+
+12. si le type de la variable est DECIMALE (9.1 ou plus) alors oui la donné sera comprise
+
+13.INT?
+
+14 DEC (9.3)
+
+15 VARCHAR
+
+16 caractere generique valeur permise
+
+17 DATETIME valeur permise entre single quote
+
+18 VALEUR NULL permise 
+
+19. non permise car NULL est un mot reservé pour les valeur non définie d'un attribut, ainsi meme une chaine de caractère ne peux pas porter NULL
+
+20, permise, IS NULL
+*****

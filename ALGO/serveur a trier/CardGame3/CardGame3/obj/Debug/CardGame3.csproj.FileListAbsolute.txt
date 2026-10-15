@@ -1,0 +1,5 @@
+C:\Users\Enael\Documents\SharpDevelop Projects\CardGame3\CardGame3\obj\Debug\CardGame3.csprojResolveAssemblyReference.cache
+C:\Users\Enael\Documents\SharpDevelop Projects\CardGame3\CardGame3\bin\Debug\CardGame3.exe
+C:\Users\Enael\Documents\SharpDevelop Projects\CardGame3\CardGame3\bin\Debug\CardGame3.pdb
+C:\Users\Enael\Documents\SharpDevelop Projects\CardGame3\CardGame3\obj\Debug\CardGame3.exe
+C:\Users\Enael\Documents\SharpDevelop Projects\CardGame3\CardGame3\obj\Debug\CardGame3.pdb

@@ -1,0 +1,123 @@
+/*
+# Créez une procédure qui crée ou met à jour une table « Results », détaillée ci-dessous, sur base d’une liste de noms de département fournis en paramètre. La table « Results » contient trois attributs :
+#   a.	Id : Clé primaire assurant l’unicité de chaque enregistrement ;
+#   b.  LaDate : Date d'insertion
+#   c.	NomDept : Nom du département
+#   d.	ListeEmployes : Chaine de caractères avec les prénoms et noms des employés le tout séparé par des virgules.
+# */
+# 
+# -- Résultat attendu
+# CALL p_listemp(' Recherche');
+# Query OK, 0 rows affected (0.00 sec)
+# 
+# CALL p_listemp('Administration,Recherche'); -- donc c'est une liste qu'on attend 
+# Query OK, 1 row affected (1.76 sec)
+# 
+# SELECT * FROM Results;
+# +----+---------------------+----------------+----------------------------------------------------------------+
+# | id | LaDate              | NomDept        | ListeEmployes                                                  |
+# +----+---------------------+----------------+----------------------------------------------------------------+
+# |  1 | 2019-05-14 11:59:12 | Recherche      | Jean Dupont, Roger Durand, Morgane Massart, Frédéric Lacroix   |
+# |  2 | 2019-05-14 11:59:12 | Administration | Stéphanie Materne, François Feraux, Alice Garet                |
+# +----+---------------------+----------------+----------------------------------------------------------------+
+# 2 rows in set (0.00 sec)
+# 
+# CALL p_listemp('Administration,Recherche');
+# Query OK, 1 row affected (0.47 sec)
+# 
+# mysql> SELECT * FROM Results;
+# +----+---------------------+----------------+----------------------------------------------------------------+
+# | id | LaDate              | NomDept        | ListeEmployes                                                  |
+# +----+---------------------+----------------+----------------------------------------------------------------+
+# |  1 | 2019-05-14 11:59:12 | Recherche      | Jean Dupont, Roger Durand, Morgane Massart, Frédéric Lacroix   |
+# |  2 | 2019-05-14 11:59:12 | Administration | Stéphanie Materne, François Feraux, Alice Garet                |
+# |  3 | 2019-05-14 11:59:29 | Recherche      | Jean Dupont, Roger Durand, Morgane Massart, Frédéric Lacroix   |
+# |  4 | 2019-05-14 11:59:30 | Administration | Stéphanie Materne, François Feraux, Alice Garet                |
+# +----+---------------------+----------------+----------------------------------------------------------------+
+# 
+# CALL p_listemp('Quartiers Généraux');
+# Query OK, 1 row affected (0.47 sec)
+# 
+# mysql> SELECT * FROM Results;
+# +----+---------------------+----------------------+----------------------------------------------------------------+
+# | id | LaDate              | NomDept              | ListeEmployes                                                  |
+# +----+---------------------+----------------------+----------------------------------------------------------------+
+# |  1 | 2019-05-14 11:59:12 | Recherche            | Jean Dupont, Roger Durand, Morgane Massart, Frédéric Lacroix   |
+# |  2 | 2019-05-14 11:59:12 | Administration       | Stéphanie Materne, François Feraux, Alice Garet                |
+# |  3 | 2019-05-14 11:59:29 | Recherche            | Jean Dupont, Roger Durand, Morgane Massart, Frédéric Lacroix   |
+# |  4 | 2019-05-14 11:59:30 | Administration       | Stéphanie Materne, François Feraux, Alice Garet                |
+# |  5 | 2019-05-14 12:00:30 | Quartiers Généraux   | James Vermeulen                                                |
+# +----+---------------------+----------------------+----------------------------------------------------------------+
+# 5 rows in set (0.00 sec)
+# 
+-- Code source :
+
+DELIMITER §çç§
+CREATE OR REPLACE PROCEDURE p_result(v_nomdedept CHAR(50))
+BEGIN
+/*voici les variables utiles pour la procedure*/
+  DECLARE v_nomcomple_emp VARCHAR(255) DEFAULT ''; -- pour le pointeur
+  DECLARE v_listnom VARCHAR(255) DEFAULT ''; -- pour y ranger chaque nom complet trouver par le pointeur
+  DECLARE v_fini BOOLEAN DEFAULT false ; -- pour le pointeur si fin de lecture.
+  DECLARE c_pointeur CURSOR FOR SELECT CONCAT(E.prenom, ' ',E.nom)  
+    FROM Employe E
+    JOIN Departement D
+    ON E.deptnr = D.numerodept
+    WHERE D.nom=v_nomdedept; -- un poiteur de nom qui va les metre un à un dans la liste
+  DECLARE CONTINUE HANDLER FOR NOT FOUND SET v_fini = TRUE;
+  /*si elle n'existe pas crée la table*/
+  CREATE TABLE IF NOT EXISTS resultade(
+    id INTEGER NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    Ladate DATE NOT NULL,
+    NomDept VARCHAR(50) DEFAULT '',
+    ListeEmployes VARCHAR (255) DEFAULT'');
+  /*ouverture du curseur et de loop de fetch*/ --  ne me reprocher pas d'utilisé se style de commentaire c'est le meme qu'il y a dans vos questions...
+  OPEN c_pointeur;
+  read_loop: LOOP
+    FETCH c_pointeur INTO v_nomcomple_emp ;
+    SELECT CONCAT (v_listnom,',',v_nomcomple_emp) INTO v_listnom ;
+    IF v_fini
+    THEN
+      LEAVE read_loop;
+    END IF;  
+  END loop read_loop;
+  CLOSE c_pointeur;
+  
+  /*Inserer dans la table Reusltade*/
+  INSERT INTO resultade(LaDate,NomDept,ListeEmployes)
+  VALUES (NOW(),v_nomdedept,v_listnom);
+  
+END §çç§
+DELIMITER ;
+    
+    CALL p_result('Administration');
+    
+    
+    SELECT CONCAT_WS(' ',E.prenom,E.nom) FROM Employe E
+    JOIN Departement D
+    ON E.deptnr = D.numerodept
+    WHERE D.nom='Recherche'; 
+    
+    apres il faut une routine stocké dans laquel
+    
+    
+    faite moi une fonction dont le premier parametre est un separateur(un carcter
+
+
+DELIMITER §çç§
+CREATE OR REPLACE FUNCTION CONCATENA(v_separator CHAR(1), v_chaine1 VARCHAR(200), v_chaine2 VARCHAR(200), v_chaine3 VARCHAR(200))
+RETURNS TEXT
+BEGIN
+DECLARE v_resultade TEXT DEFAULT'';
+  RETURN CONCAT(v_chaine1,v_separator,v_chaine2,v_separator,v_chaine2,v_separator);
+END §çç§
+DELIMITER ;
+
+-- comment crée une fonction qui permette de mettre des virgule au tant de fois qu'il y ai de chaine de caractere (on doit utilisé le curseur)
+
+-- cree une table qu'avec les PROCEDURE
+
+--
+
+
+    

@@ -1,0 +1,483 @@
+# /*
+# Créez une fonction qui produit une chaine de caractères reprenant les prénoms et noms des employés appartenant à un département donné, 
+le tout séparé par des virgules.
+# 
+# Points d’attention :
+# --------------------
+
+#   a. La fonction doit renvoyer un NULL si la liste de noms est vide ou si le numéro de département n’est pas connu.
+#   b.	Evitez d’avoir une virgule seule en début ou fin de liste.
+# */
+
+DELIMITER çç
+CREATE OR REPLACE FUNCTION ListerNom (wxc CHAR(4))--je crée une fonction qui attend un parametre formel un CHAR comme le dept_no dans la table(de même type)
+  RETURNS VARCHAR(255)
+  BEGIN
+  
+    DECLARE v_nom,v_prenom VARCHAR(255) DEFAULT '';--variables pour mon curseur
+    DECLARE v_result VARCHAR(255) DEFAULT'';--je vais y concaténé ligne par ligne et tenté un +=
+    DECLARE v_fini BOOLEAN DEFAULT FALSE;--variable fin de cursor
+    DECLARE pointeur CURSOR FOR 
+      SELECT first_name,last_name FROM Employees E
+      JOIN dept_emp DE ON E.emp_no=DE.emp_no
+      WHERE DE.dept_no=wxc;-- quand le numero de departement donné en parametre correspond a mon DE.dept_no
+    DECLARE CONTINUE HANDLE FOR NOT FOUND set v_fini =TRUE;
+    /*FIN DE DECLARATION DE VARIABLES*/
+    IF wxc IS NULL THEN v_result = NULL; /*si le parametre IN est null je souhaiterais que le v_result soit null*/
+    END IF;
+      OPEN pointeur;--jouvre le pointeur
+        read loop: LOOP 
+          FETCH pointeur INTO v_prenom, v_nom;--pour chaque ligne met les dans mes variables
+          IF v_fini THEN LEAVE read loop ;-- dois je e placé ici? je ne sais pas si il ya une distinction claire pour le sgbd relationnelle entre le curseur qui n'a plus de ligne a lire ou une table vide?
+          ELSE
+          v_result = CONCAT (v_result,',',v_prenom ,' ',v_nom); --concataine le prenom espace nom virgule puis le v_result précedent
+          END IF;
+        END LOOP read loop;
+    IF v_result='' THEN v_result = NULL;
+    END IF;
+    RETURN v_result;/*un seul RETURN*/     
+  END çç
+DELIMITER;
+
+# /* En tant que gestionnaire de la base de données Fil Rouge, il vous est demandé de calculer une prime 
+pour chaque directeur de département. Sachant qu'elle doit correspondre à son salaire multiplié 
+par le nombre de décennie (1 décennie = 10 ans) depuis ses 18 ans jusqu'à aujourd'hui.
+# En d'autres mots, si un directeur gagne 50000 € et a aujourd'hui 55 ans, 
+il a donc complété 3 décennie (55-18=37 années c-à-d 3 décennies), sa prime s'élèvera à 50000 x 3 = 150000 €.
+# 
+# Veuillez programmer une fonction de calcul de prime et montrez qu'elle peut être utilisée au sein d'une requête SQL
+ qui affichera un résultat sous la forme d'un seul tableau. 
+ Veuillez donc fournir le code de votre fonction et l'instruction utilisée pour afficher le tableau demandé.
+# nss   Nom   Prenom  Age   Prime
+# 888665555   Vermeulen   James   90   385000
+# 987654321   Materne   Stéphanie   87   258000
+# */
+/* je vies de voir que c'est sur Filrouge, mais j'ai utilisé la BD employees*/
+/*Je declare une fonction qui augmente le salire*/
+DELIMITER çç
+CREATE OR REPLACE FUNCTION IndexerParDecenie(wxc INTEGER)
+RETURNS INTEGER
+BEGIN
+DECLARE v_decenie INTEGER DEFAULT 0;
+DECLARE v_age INTEGER DEFAULT 0;
+DECLARE v_result INTEGER DEFAULT 0;
+
+  SELECT TIMESTAMPDIFF(year,birth_date,NOW()) INTO v_age -- affice moi l'age
+  FROM employees E
+  JOIN salaries S ON S.emp_no=E.emp_no
+  WHERE emp_no=wxc AND S.to_date>NOW(); -- AND to_date NOW car il doit encor travaillé dans l'entreprise.
+    
+  SELECT FLOOR((v_age-18)/10) INTO v_decenie;-- arrondi a l'unitée la plus petite  
+  IF v_decenie>0 AND wxc IN(SELECT emp_no FROM dept_manager) -- si la decenie est au dessus de zero, pour eviter d'indexer un salaire a -100% ET que c'est bien un manager
+  THEN    
+    SELECT salary*v_decenie  
+    INTO v_result FROM salaries
+    WHERE emp_no =wxc;
+  END IF;
+  RETURN v_result;
+END çç
+DELIMITER ;
+
+/*JE prepare une requette préparé qui affichera le tabeau de l'énnoncé*/
+/*______________________________________________
+_________________________________________________*/
+SELECT emp_no,last_name,first_name,
+TIMESTAMP(year,birth_date,NOW()) as Age,
+IndexerParDecenie(emp_no) as Prime 
+FROM employees 
+WHERE emp_no IN (SELECT emp_no FROM dept_manager);
+
+DELIMITER çç
+CREATE OR REPLACE FUNCTION IndexerParDecenie(wxc INTEGER)
+RETURNS INTEGER
+BEGIN
+DECLARE v_decenie INTEGER DEFAULT 0;
+DECLARE v_age INTEGER DEFAULT 0;
+DECLARE V_prime INTEGER DEFAULT 0;
+
+  SELECT TIMESTAMPDIFF(year,birth_date,NOW()) INTO v_age 
+  FROM employees E
+  JOIN salaries S ON S.emp_no=E.emp_no
+  WHERE E.emp_no=wxc AND S.to_date>NOW(); 
+    
+  SELECT FLOOR((v_age-18)/10) INTO v_decenie; 
+  IF v_decenie>0  
+  THEN    
+    SELECT SUM(S.salary*v_decenie) 
+    INTO V_prime FROM salaries S
+    WHERE S.emp_no =wxc AND wxc IN(SELECT emp_no FROM dept_manager);
+  ELSE 
+    SELECT SUM(salary*1)  
+    INTO V_prime FROM salaries
+    WHERE emp_no =wxc AND wxc IN(SELECT emp_no FROM dept_manager);
+  END IF;
+  RETURN V_prime;
+END çç
+DELIMITER ;
+
+/*JE prepare une requette préparé qui affichera le tabeau de l'énnoncé*/
+
+SELECT E.emp_no,E.last_name,E.first_name,
+TIMESTAMPDIFF(year,E.birth_date,CURDATE()) as Age,
+IndexerParDecenie(E.emp_no) as Prime 
+FROM employees E
+WHERE E.emp_no IN (SELECT D.emp_no FROM dept_manager D);
+
+/*//////////////////////////////////////////////////////*/
+
+/*ZAK MODIF*/
+DELIMITER $
+CREATE OR REPLACE FUNCTION f_ListEmp (v_departement INTEGER)
+RETURNS CHAR(255)
+BEGIN
+  DECLARE v_nom CHAR(255) DEFAULT '';
+  DECLARE v_prenom CHAR(255) DEFAULT '';
+  DECLARE v_result CHAR(255) DEFAULT '';
+  DECLARE v_null BOOL DEFAULT FALSE;
+  DECLARE c_pointeur CURSOR FOR SELECT nom,prenom FROM Employe WHERE deptnr=v_departement;
+  DECLARE CONTINUE HANDLER FOR NOT FOUND SET v_null=TRUE;
+  OPEN c_pointeur;
+  laloop: LOOP
+    FETCH c_pointeur INTO v_nom,v_prenom;
+    IF v_null THEN LEAVE laloop;
+    END IF;
+	if LENGTH(v_result)=0 then
+    SET v_result = CONCAT(v_nom,' ',v_prenom);    
+	else
+	SET v_result = CONCAT(v_result,',',v_nom,' ',v_prenom);  
+	end if;
+  END LOOP laloop;
+  CLOSE c_pointeur;
+  IF v_result = ''
+    THEN SET v_result='NULL';
+  END IF;
+  RETURN v_result;
+END $
+DELIMITER ;
+
+# /*
+# Créez une procédure qui crée ou met à jour une table « Results », détaillée ci-dessous,
+ sur base d’une liste de noms de département fournis en paramètre.
+ La table « Results » contient trois attributs :
+#   a.	Id : Clé primaire assurant l’unicité de chaque enregistrement ;
+#   b.  LaDate : Date d'insertion
+#   c.	NomDept : Nom du département
+#   d.	ListeEmployes : Chaine de caractères avec les prénoms
+        et noms des employés le tout séparé par des virgules.
+# */
+# 
+# -- Résultat attendu
+# CALL p_listemp(' Recherche');
+# Query OK, 0 rows affected (0.00 sec)
+# 
+# CALL p_listemp('Administration,Recherche');
+# Query OK, 1 row affected (1.76 sec)
+# 
+# SELECT * FROM Results;
+# +----+---------------------+----------------+----------------------------------------------------------------+
+# | id | LaDate              | NomDept        | ListeEmployes                                                  |
+# +----+---------------------+----------------+----------------------------------------------------------------+
+# |  1 | 2019-05-14 11:59:12 | Recherche      | Jean Dupont, Roger Durand, Morgane Massart, Frédéric Lacroix   |
+# |  2 | 2019-05-14 11:59:12 | Administration | Stéphanie Materne, François Feraux, Alice Garet                |
+# +----+---------------------+----------------+----------------------------------------------------------------+
+# 2 rows in set (0.00 sec)
+# 
+# CALL p_listemp('Administration,Recherche');
+# Query OK, 1 row affected (0.47 sec)
+# 
+# mysql> SELECT * FROM Results;
+# +----+---------------------+----------------+----------------------------------------------------------------+
+# | id | LaDate              | NomDept        | ListeEmployes                                                  |
+# +----+---------------------+----------------+----------------------------------------------------------------+
+# |  1 | 2019-05-14 11:59:12 | Recherche      | Jean Dupont, Roger Durand, Morgane Massart, Frédéric Lacroix   |
+# |  2 | 2019-05-14 11:59:12 | Administration | Stéphanie Materne, François Feraux, Alice Garet                |
+# |  3 | 2019-05-14 11:59:29 | Recherche      | Jean Dupont, Roger Durand, Morgane Massart, Frédéric Lacroix   |
+# |  4 | 2019-05-14 11:59:30 | Administration | Stéphanie Materne, François Feraux, Alice Garet                |
+# +----+---------------------+----------------+----------------------------------------------------------------+
+# 
+# CALL p_listemp('Quartiers Généraux');
+# Query OK, 1 row affected (0.47 sec)
+# 
+# mysql> SELECT * FROM Results;
+# +----+---------------------+----------------------+----------------------------------------------------------------+
+# | id | LaDate              | NomDept              | ListeEmployes                                                  |
+# +----+---------------------+----------------------+----------------------------------------------------------------+
+# |  1 | 2019-05-14 11:59:12 | Recherche            | Jean Dupont, Roger Durand, Morgane Massart, Frédéric Lacroix   |
+# |  2 | 2019-05-14 11:59:12 | Administration       | Stéphanie Materne, François Feraux, Alice Garet                |
+# |  3 | 2019-05-14 11:59:29 | Recherche            | Jean Dupont, Roger Durand, Morgane Massart, Frédéric Lacroix   |
+# |  4 | 2019-05-14 11:59:30 | Administration       | Stéphanie Materne, François Feraux, Alice Garet                |
+# |  5 | 2019-05-14 12:00:30 | Quartiers Généraux   | James Vermeulen                                                |
+# +----+---------------------+----------------------+----------------------------------------------------------------+
+# 5 rows in set (0.00 sec)
+# 
+-- Code source
+--------------
+~
+CREATE OR REPLACE TABLE Results (
+id INTEGER NOT NULL AUTO_INCREMENT PRIMARY KEY,
+Ladate DATE NOT NULL,
+NomDept VARCHAR(50) DEFAULT '',
+ListeEmployes VARCHAR (255) DEFAULT'');
+
+DELIMITER §çç§
+CREATE OR REPLACE PROCEDURE p_listemp(wxc VARCHAR(255))
+
+BEGIN
+  DECLARE v_listnom VARCHAR(255) DEFAULT '';
+  
+  SELECT GROUP_CONCAT(CONCAT(E.prenom, ' ',E.nom) SEPARATOR ',')
+  INTO v_listnom FROM Employe E
+  JOIN Departement D
+  ON E.deptnr = D.numerodept
+  WHERE D.nom=wxc;
+  
+  INSERT INTO Results(LaDate,NomDept,ListeEmployes)
+  VALUES (NOW(),wxc,v_listnom);
+END §çç§
+DELIMITER ;
+
+/*///////////////////////////*/
+/*
+
+Créez une routine stockée CROPTO(wxc VARCHAR(255))
+|__Compter le nom de caractère de la chaine
+|__Retourne la chaine décalé de x caractère
+ 
+exemple
+SELECT CROPTO('BONjour') => 'IVUqvby'
+
+*/
+
+CREATE OR REPLACE TABLE Alphabet(
+id INTEGER AUTO_INCREMENT PRIMARY KEY,
+lettre CHAR(1) NOT NULL);
+
+INSERT INTO Alphabet(lettre)
+VALUES('a'),('b'),('c'),('d'),('e'),('f'),('g'),('h'),('i'),('j'),('k'),('l'),('m'),('n'),('o'),('p'),('q'),('r'),('s'),('t'),('u'),('v'),('w'),('x'),('y'),('z');
+
+-- au lieu de créer une table je peux faire DECLARE alphabet CHAR(26) DEFAULT 'abcdefghijklmnopqrst';
+DELIMITER §çç§
+CREATE OR REPLACE FUNCTION CROPTO(wxc VARCHAR(255))
+RETURNS VARCHAR(255)
+BEGIN
+  
+  DECLARE v_outchar VARCHAR(255) DEFAULT''; /*pour ranger la concatenation des caractere*/
+  DECLARE v_xxx INTEGER DEFAULT 0;/*pour la longueur du mot*/
+  DECLARE v_i INTEGER DEFAULT 1;/*Pour la fonction MID()*/
+  DECLARE v_charUin CHAR(1) DEFAULT'';/*ranger le caractere d'entre*/
+  DECLARE v_charUout CHAR(1) DEFAULT'';/*ranger le caractère de sortie*/  
+  DECLARE v_id INTEGER;/*ranger l'id d'entré correspondant a la lettre d'entre*/
+  
+  SELECT LENGTH(wxc) INTO v_xxx; /*v_xxx=longueur du mot wxc*/
+      
+  WHILE v_i<=v_xxx DO /*tant que le compteur est plus petie ou egale a la longue du mot fait*/
+    
+    SELECT MID(wxc,v_i,1) INTO v_charUin; /*MID() fonction pour choisir une partie d'un STRING ici la parti doit avoir une longueur de 1 CHAR a la position v_i*/  
+    SELECT (A.id+v_xxx)%26 INTO v_id /*j'aditionne l'id de la lettre initial a la longueur du mot wxc qui donnera l'indice de la lettre crypté*/
+        FROM Alphabet A
+        WHERE lettre=LOWER(v_charUin);/*ma table alphabet contient que des minusules*/
+        
+    IF v_id=0 THEN /*MAIS SI par exemple la longueur du mot+id modulo 26 font 0 alors c'est que c'est z qui est chercher*/
+    SET v_id=26;
+    END IF;
+     /* SELECT 33%26 retourne 7 dans le cas ou un mot comme 'bonzour' est entré 
+        et qu'on veux convertir le Z en id+7* 
+        26 eme lettre est le Z+7 induit par la longueur du mot font 33        
+        si on a le c comme dans 'boncour' alors id vaut (3+7)%26=11%26=11    */
+    
+    IF v_charUin=(SELECT UPPER(v_charUin)) /*si la lettre d'entré egale la capital de cette lettre*/
+    THEN
+      SELECT UPPER(lettre) INTO v_charUout 
+        FROM Alphabet 
+        WHERE id=v_id;/*choisi la lettre en capital dans le tableau a l'id caluculerplus haut*/
+      SELECT CONCAT(v_outchar,v_charUout) INTO v_outchar;
+      
+    ELSE /*v_charUin=(SELECT LOWER(v_charUin))/*si la lettre est une minuscule*/   
+    /*THEN*/
+      SELECT LOWER(lettre) INTO v_charUout 
+        FROM Alphabet 
+        WHERE id=v_id;
+      SELECT CONCAT(v_outchar,v_charUout) INTO v_outchar;
+    END IF;
+    SET v_i = (v_i+1);/*je rajoute 1 à ce compteur pour la fonction MID()*/
+  END WHILE;/*fin de boucle while*/
+  RETURN v_outchar;
+END §çç§
+DELIMITER ;
+
+
+DELIMITER §çç§
+CREATE OR REPLACE FUNCTION CROPTO(wxc VARCHAR(255))
+RETURNS VARCHAR(255)
+BEGIN
+  
+  DECLARE v_outchar VARCHAR(255) DEFAULT''; /*pour ranger la concatenation des caractere*/
+  DECLARE v_xxx INTEGER DEFAULT 0;/*pour la longueur du mot*/
+  DECLARE v_i INTEGER DEFAULT 1;/*Pour la fonction MID()*/
+  DECLARE v_charUin CHAR(1) DEFAULT'';/*ranger le caractere d'entre*/
+  DECLARE v_charUout CHAR(1) DEFAULT'';/*ranger le caractère de sortie*/  
+  DECLARE v_id INTEGER;/*ranger l'id d'entré correspondant a la lettre d'entre*/
+  DECLARE c_value INTEGER DEFAULT 0;
+  
+  SELECT LENGTH(wxc) INTO v_xxx; /*v_xxx=longueur du mot wxc*/
+      
+  WHILE v_i<=v_xxx DO /*tant que le compteur est plus petie ou egale a la longue du mot fait*/
+    
+    SELECT MID(wxc,v_i,1) INTO v_charUin; /*MID() fonction pour choisir une partie d'un STRING ici la parti doit avoir une longueur de 1 CHAR a la position v_i*/  
+    SELECT (A.id+v_xxx)%26 INTO v_id /*j'aditionne l'id de la lettre initial a la longueur du mot wxc qui donnera l'indice de la lettre crypté*/
+        FROM Alphabet A
+        WHERE lettre=LOWER(v_charUin);/*ma table alphabet contient que des minusules*/
+        
+    IF v_id=0 THEN /*MAIS SI par exemple la longueur du mot+id modulo 26 font 0 alors c'est que c'est z qui est chercher*/
+    SET v_id=26;
+    END IF;
+     /* SELECT 33%26 retourne 7 dans le cas ou un mot comme 'bonzour' est entré 
+        et qu'on veux convertir le Z en id+7* 
+        26 eme lettre est le Z+7 induit par la longueur du mot font 33        
+        si on a le c comme dans 'boncour' alors id vaut (3+7)%26=11%26=11 */
+    IF v_charUin=(SELECT UPPER(v_charUin))
+    THEN SET c_value := 2;
+    ELSEIF v_charUin=(SELECT LOWER(v_charUin))-- si on veut entre 10 et 19 SELECT (1045%10)+10
+    THEN SET c_value :=1;
+    END IF;
+    
+    CASE c_value /*si la lettre d'entré egale la capital de cette lettre*/
+    WHEN 2
+    THEN
+      SELECT UPPER(lettre) INTO v_charUout 
+        FROM Alphabet 
+        WHERE id=v_id;/*choisi la lettre en capital dans le tableau a l'id caluculerplus haut*/
+      SELECT CONCAT(v_outchar,v_charUout) INTO v_outchar;
+      
+    WHEN 1 /*v_charUin=(SELECT LOWER(v_charUin))/*si la lettre est une minuscule*/   
+    THEN
+      SELECT LOWER(lettre) INTO v_charUout 
+        FROM Alphabet 
+        WHERE id=v_id;
+      SELECT CONCAT(v_outchar,v_charUout) INTO v_outchar;
+    END CASE;
+    SET v_i = (v_i+1);/*je rajoute 1 à ce compteur pour la fonction MID()*/
+  END WHILE;/*fin de boucle while*/
+  RETURN v_outchar;
+END §çç§
+DELIMITER ;
+
+
+/*///////////////////////////////////////////////////////////////////////////////////*/
+
+# /*
+# Veuillez programmer une procédure de création d'utilisateur locaux (localhost) qui prendra les 3 paramètres suivants:
+# 
+#     Le premier paramètre correspondra au profil de l'utilisateur à créer. Si le profil fourni n'est pas reconnu, c'est le profil "Simple" qui sera appliqué:
+#         Simple: Utilisateur avec les droits de lecture (SELECT) sur toute la base de donnée Fil_Rouge;
+#         Middle: Utilisateur avec des droits de lecture et d'écriture (SELECT, INSERT,DELETE et UPDATE) sur toute la base de donnée Fil_Rouge;
+#         Superior: Utilisateur avec des droits de gestion (CREATE, ALTER et DROP) sur toute la base de donnée Fil_Rouge.
+#     Le deuxième paramètre correspond au nom de l’utilisateur. Si le nom existe déjà, la procédure s'arrêtera et affichera un message indiquant que ce nom d'utilisateur est déjà pris.
+#     Le troisième paramètre correspond au mot de passe qui sera assigné à l'utilisateur. Ce mot de passe devra:
+#         Être entre 8 et 15 caractères de long;
+#         Démarrer par une lettre;
+#         Contenir au moins 1 chiffre.
+# 
+# */
+
+CREATE OR REPLACE TABLE loc_user_al
+(
+id INT NOT NULL AUTO_INCREMENT PRIMARY KEY, 
+profil VARCHAR(10) DEFAULT '',
+name VARCHAR(50) DEFAULT '',
+pass VARCHAR(15) DEFAULT '',
+droitLE VARCHAR (30) DEFAULT '',
+);
+
+DELIMITER §çç§
+CREATE OR REPLACE PROCEDURE CreatLocalUser
+( v_profil VARCHAR(10), v_name VARCHAR(255), v_mdp VARCHAR(15)) 
+BEGIN
+  DECLARE i_profil VARCHAR(10); /*variable a inserer, je le ferais en une ligne pour tout les autre variables*/
+  DECLARE i_droits VARCHAR(30);
+
+  IF (v_profil='Superior')
+  THEN
+    SET i_profil=v_profil 
+    AND i_droit='';
+  ELSEIF (v_profil='Middle') /*noteàmême : ELSEIF EN UN MOT*/
+  THEN
+    SET i_profil=v_profil;
+  ELSE
+    SET i_profil='Simple';
+  END IF;
+  
+  INSERT INTO loc_user_al(profil,name,pass) 
+  VALUES (i_profil,v_name,v_mdp);
+END §çç§
+DELIMITER ;
+
+-- COMMENTAIRE DEUX TIRET SUIVI D'UN ESPACE ensuite le COMMENTAIRE
+
+
+DETERMINISTIC /*current date n'est pas une fonction deterministic, il veut dire que pour toute meme entré t'aura toujour le meme resutat en sortie*/
+
+**Utilise LEFT JOIN quand :**
+- Tu veux conserver toutes les lignes de la table principale (celle de gauche)
+- Tu veux éviter de perdre des données à cause de l'absence de correspondance
+- Tu travailles avec des relations optionnelles (un livre peut ne pas avoir d'emprunt)
+
+**Utilise INNER JOIN quand :**
+- Tu veux seulement les lignes qui ont une correspondance dans les deux tables
+- Les relations sont obligatoires (un emprunt DOIT avoir un livre ET un membre)
+
+
+## Règle mnémotechnique
+
+**LEFT JOIN** = "Je veux **TOUT** ce qui est mentionné en **PREMIER** (avant JOIN)"  
+**RIGHT JOIN** = "Je veux **TOUT** ce qui est mentionné en **SECOND** (après JOIN)"
+
+case défini
+DECLARE v_note INT DEFAULT 15;
+
+CASE v_note  -- ← L'expression à tester
+  WHEN 18 THEN SET v_mention = 'Excellent';
+  WHEN 16 THEN SET v_mention = 'Très bien';
+  WHEN 14 THEN SET v_mention = 'Bien';
+  WHEN 12 THEN SET v_mention = 'Assez bien';
+  ELSE SET v_mention = 'Insuffisant';
+END CASE;
+
+DECLARE v_note INT DEFAULT 15;
+
+case indefini
+CASE
+  WHEN v_note >= 18 THEN SET v_mention = 'Excellent';
+  WHEN v_note >= 16 THEN SET v_mention = 'Très bien';
+  WHEN v_note >= 14 THEN SET v_mention = 'Bien';
+  WHEN v_note >= 12 THEN SET v_mention = 'Assez bien';
+  ELSE SET v_mention = 'Insuffisant';
+END CASE;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

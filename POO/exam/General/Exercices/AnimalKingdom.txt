@@ -1,0 +1,11 @@
+2.2.	The Animal Kingdom.
+2.2.1.	We want to elaborate the class animals to reflect the real animal kingdom. We are going to pick some kinds of species and we will have a closer look at their specific properties.
+We will consider the following groups: mammals, reptiles, birds.
+The main difference between these families is their body covering: mammals have hair, birds have feathers and reptiles have scales.
+Mammals are characterized by the fact that they have hair on their skin and that they give birth to living kids. Examples of mammals are rodents, horses, carnivores and elephants.
+Elephant exists in two species, namely the African and the Asian elephant. The African one has larger ears as the Asian one. The color of the elephant is gray and their weight is about 800 kg.
+Mice exist also in two species, the white and the gray mouse. Their weight is about 100 gr.
+The brown platypus is a special kind of animal. Although it’s a mammal, it gives birth by means of eggs. Otherwise it has all the characteristics of a mammal. Their weight is about 1 kg.
+2.2.2.	Find the class hierarchy that describes the animal world described.
+2.2.3.	Define the different properties.
+2.2.4.	Are there examples of polymorphism, inheritance or specialization?

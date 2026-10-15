@@ -1,0 +1,6 @@
+/Users/emac/Documents/formation/Principe d'algo/DEvoir teams/paldinrdrome/paldinrdrome/obj/Debug/paldinrdrome.csproj.AssemblyReference.cache
+/Users/emac/Documents/formation/Principe d'algo/DEvoir teams/paldinrdrome/paldinrdrome/obj/Debug/paldinrdrome.csproj.CoreCompileInputs.cache
+/Users/emac/Documents/formation/Principe d'algo/DEvoir teams/paldinrdrome/paldinrdrome/bin/Debug/paldinrdrome.exe
+/Users/emac/Documents/formation/Principe d'algo/DEvoir teams/paldinrdrome/paldinrdrome/bin/Debug/paldinrdrome.pdb
+/Users/emac/Documents/formation/Principe d'algo/DEvoir teams/paldinrdrome/paldinrdrome/obj/Debug/paldinrdrome.exe
+/Users/emac/Documents/formation/Principe d'algo/DEvoir teams/paldinrdrome/paldinrdrome/obj/Debug/paldinrdrome.pdb

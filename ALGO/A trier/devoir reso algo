@@ -1,0 +1,211 @@
+devoir algo 030125
+LAGHMICH ANESE
+(PS : je suis parti chercher de l'info sur youtube pour les boucle imbriquées... 
+où sont vos syllabus, ils sont absent du teams? il n'y a pas de version papier de vos syllabus?)
+
+___________________________
+1)
+using System;
+namespace exo1
+{
+    internal class Program
+    {
+        public static void Main(string[] args)
+        {
+           Console.WriteLine("Bonjour cher utilisateur");
+           Console.Write("quel est votre nom? ");
+           string nom = Console.ReadLine();
+           Console.Write("quel est votre prenom? ");
+           string prenom = Console.ReadLine();
+           
+           Console.WriteLine(" ");
+           Console.WriteLine("Vous vous appelez "+ prenom +" " +nom);
+           Console.ReadKey(true);
+        }
+    }
+}
+__________________________
+
+2)
+
+using System;
+namespace exo2
+{
+    internal class Program
+    {
+        public static void Main(string[] args)
+        {
+            Console.WriteLine("Bonjour cher utilisateur");
+            Console.Write("quel est votre nom? ");
+            string nomstring = Console.ReadLine();
+            
+            int taillenom = nomstring.Length;
+            int max = 10;
+            int min = 6;
+
+           if (taillenom > max)
+            {
+                Console.WriteLine("C'est long! Le nom doit contenir moins de " + max + " charateres");   
+            }
+           if (taillenom < min)
+            {
+                Console.WriteLine("C'est court! Le nom doit contenir plus de " + min + " charateres"); 
+            }
+           else if (taillenom<max && taillenom>min)
+           {
+               Console.WriteLine("C'est d'une taille normal!");
+           }
+        }
+    }
+}
+__________________________
+
+3)
+
+using System;
+namespace exo_3
+{
+    internal class Program
+    {
+        public static void Main(string[] args)
+        {
+          Console.Write("choisissez un nombre entre 3 et 20 : ");
+          string nombrestring = Console.ReadLine();
+          int nombre = int32.Parse(nombrestring);
+          int max = 20;
+          int min = 3;
+          
+          if (nombre>max)
+          {
+              Console.WriteLine(max);
+              
+          }
+
+          if (nombre < min)
+          {
+              Console.WriteLine(min);
+          }
+          else if (nombre < max && nombre > min)
+          {
+              for (int i = 0; i < nombre; i++)
+              {
+                  Console.Write("*");
+              }
+          }
+        
+        }
+    }
+}
+____________________________
+
+4)
+
+using System;
+
+namespace exo4
+{
+    internal class Program
+    {
+        public static void Main(string[] args)
+        {
+            Console.Write("Choisissez un nombre : ");
+            string nombreString = Console.ReadLine();
+            int n = int32.Parse(nombreString);
+            if (n%2 == 0)
+            {
+                Console.WriteLine("c'est un nombre paire! ");
+            }
+            if (n%2 != 0)
+            {
+                Console.Write("C'est un nombre impaire! ");
+            }
+            if(n%3 ==0) 
+            { 
+                Console.WriteLine("Et ce nombre est divisible par 3!");
+            }
+            
+            int nombrecaré = n * n;
+            Console.Write("Voici son carré : ");
+            Console.WriteLine(nombrecaré);
+            
+            int zerocount = 0;
+            char zero = '0';
+            for(int i =0; i<=nombreString.Length; i++)
+            {
+                if (i == zero)
+                {
+                    zerocount++;
+                }
+            }
+            if (zerocount == 0)
+            {
+                Console.WriteLine("il n'y a aucun Zéro dans ton nombre");
+            }
+            else if (zerocount != 0)
+            {
+                Console.WriteLine("ton nombre contient "+ zerocount + " fois zéro");
+            }
+        }
+    }
+}
+__________________________
+
+5)
+
+using System;
+
+namespace exo5
+{
+    internal class Program
+    {
+        public static void Main(string[] args)
+        {
+            // je ne sais pas comment convertir un sting contenant une virgule vers un int
+            Console.Write("Quel est le diamètre?(san virgule et en cm) : ");
+            string diaString = Console.ReadLine();
+            int dia = Int32.Parse(diaString);
+            /*
+             permiètre d'un cercle 2 x pi x r
+             surface d'un cercle pi x r^2
+            */
+            float PI = (float) 3.14159265359 ;
+            float r = (float)dia / 2;
+            float perimetre = (2 * PI * r);
+            /*
+            ne sachant pas trouvé d'explication claire sur les exposant 
+            j'ai just fait r x r pour l'exposant 2 je ne trouve pas d'explication clair sur microsoft
+            on y dit qu'il faut utilisé un public math? 
+            */
+            float surface = (PI * (r * r));
+            Console.WriteLine("Son permiètre est de : " + perimetre+ " cm");
+            Console.WriteLine("Sa surface est de : " + surface+ " cm2");
+            //comment limité le nombre de decimal apres la virgule?
+        }
+    }
+}
+____________________
+6)
+
+using System
+namespace exo_gpt1
+{
+    internal class Program
+    {
+        public static void Main(string[] args)
+        { 
+            Console.Write("choisissez un nombre (sans virgule): ");
+            string ns = Console.ReadLine();
+            int n=int.Parse(ns);
+
+            if (n == 0)
+            {
+                Console.WriteLine("Ca ne fonctionne pas avec Zero");
+            }
+            for (int i = 1; i <= n; i++)
+            {
+                Console.Write("*"); 
+                Console.WriteLine();
+            }
+        }
+    }
+}

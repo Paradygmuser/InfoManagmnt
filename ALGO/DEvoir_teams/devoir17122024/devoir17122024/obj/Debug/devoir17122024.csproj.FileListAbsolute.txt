@@ -1,0 +1,6 @@
+/Users/emac/Documents/formation/Principe d'algo/DEvoir teams/devoir17122024/devoir17122024/bin/Debug/devoir17122024.exe
+/Users/emac/Documents/formation/Principe d'algo/DEvoir teams/devoir17122024/devoir17122024/bin/Debug/devoir17122024.pdb
+/Users/emac/Documents/formation/Principe d'algo/DEvoir teams/devoir17122024/devoir17122024/obj/Debug/devoir17122024.csproj.AssemblyReference.cache
+/Users/emac/Documents/formation/Principe d'algo/DEvoir teams/devoir17122024/devoir17122024/obj/Debug/devoir17122024.csproj.CoreCompileInputs.cache
+/Users/emac/Documents/formation/Principe d'algo/DEvoir teams/devoir17122024/devoir17122024/obj/Debug/devoir17122024.exe
+/Users/emac/Documents/formation/Principe d'algo/DEvoir teams/devoir17122024/devoir17122024/obj/Debug/devoir17122024.pdb

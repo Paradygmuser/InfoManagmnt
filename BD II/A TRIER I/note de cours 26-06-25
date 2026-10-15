@@ -1,0 +1,113 @@
+-- note de cours de base de donnée 26-06-25
+
+-- Faire une fonction qui trouver le nombre d'element dans une chaine de caractere qui porte des virgules
+DELIMITER §çç§
+CREATE OR REPLACE FUNCTION foreachelemnt(v_chain VARCHAR(200))
+RETURNS INTEGER
+BEGIN
+  IF LENGTH(v_chain)>0
+  THEN
+    RETURN LENGTH(v_chain) - LENGTH(REPLACE(v_chain, ',', '')) +1;
+  END IF;
+  RETURN 0;
+END §çç§
+DELIMITER ;
+
+-- ok mais pour ',,' compter la taile des ellment pour eviter que des double virgules
+
+
+l'identité d'un compte est different de l'acces de ce compte
+
+l'identité peut etre un programme comme une personne
+
+Utilisateurs(individu, groupe,virtuel)
+Action/operation(créer, modifier, supprimer, selectionner)
+REssource(Acces&Privilège) 
+
+QUI - QUOI - et SUR QUOI on agit
+
+un utilisateur est identifier par une combinaison entre 2 information
+
+user01@'localhost'
+
+user01 est l'identifiant, l'identifiant permet de distinguer une personne par une autre, "une etiquette", l'authentification par identification est une securité 
+@ symbole qui permet de separer l'identifiant et l'orginie de connexion
+'localhost' correspond à l'adresse a partir de laquelle l'utilisateur se connecte, c'est l'origine de connexion, donc l'adress ip a laquel ils se connect par default l'adresse est ocalhost
+
+le % aide a faire par exemple student01@% ou student01@%.exemple.com ca marche aussi avec les adresse ip
+
+MariaDB [mysql]> SHOW GRANTS FOR '18'@'localhost';
+ERROR 1141 (42000): There is no such grant defined for user '18' on host 'localhost'
+MariaDB [mysql]> SHOW GRANTS FOR 'root'@'localhost';
++---------------------------------------------------------------------+
+| Grants for root@localhost                                           |
++---------------------------------------------------------------------+
+| GRANT ALL PRIVILEGES ON *.* TO `root`@`localhost` WITH GRANT OPTION | --  la premiere etoile ca veut dire toutes les bases de données ensuite l'etoile pour dire toute les table de cette base de donnée 
+| GRANT PROXY ON ''@'%' TO 'root'@'localhost' WITH GRANT OPTION       |
++---------------------------------------------------------------------+
+2 rows in set (0.009 sec)
+/*
+on peux toute de suis utilisé la commande d'assignation de droit en y créeabt 
+on peut l'utilisé partout(n'importe quel base de donnée)
+
+ALL privilege donne tout les droits
+ON (sur quoi?)
+WITH GRANT OPTION - - on accord alors le plus important des privilege qui est de crée un utilisateur.
+
+REVOKE c'est la meme logique que le GRANT 
+*/
+
+CREATE USER IF NOT EXISTS 'enael'@'localhost' IDENTIFIED BY 'e8fbf632bf4ad88248fa7211ec9cf7da4739ebe0ec336be238051eb2';
+GRANT ALL PRIVILEGES ON *.* TO 'enael'@'localhost' ; (WITH GRANT OPTION)
+
+-- show processlist;
+
+-- ipconfig 
+
+CREATE USER IF NOT EXISTS 'enael'@'192.168.1.53' IDENTIFIED BY 'e8fbf632bf4ad88248fa7211ec9cf7da4739ebe0ec336be238051eb2';
+
+DELIMITer §çç§
+CREATE TRIGGER update_timestamp
+BEFORE UPDATE ON your_table
+FOR EACH ROW
+BEGIN
+SET NEW.updated_at = NOW();
+END;
+DELIMITer §çç§
+SELECT * FROM table;
+
+-- Prepare the statement
+PREPARE stmt FROM 'SELECT * FROM users WHERE id = ?';
+-- Execute the statement with a value for the placeholder
+SET @user_id = 1;
+EXECUTE stmt USING @user_id;
+-- Execute the statement again with a different value
+SET @user_id = 2;
+EXECUTE stmt USING @user_id;
+
+-- Clean up
+DEALLOCATE PREPARE stmt;
+
+-- Faire une fonction qui trouver le nombre d'element dans une chaine de caractere qui porte des virgules
+DELIMITER §çç§
+CREATE OR REPLACE FUNCTION foreachelemnt(v_chain VARCHAR(200))
+RETURNS INTEGER
+BEGIN
+  IF LENGTH(v_chain)>0
+  THEN
+    RETURN LENGTH(v_chain) - LENGTH(REPLACE(v_chain, ',', '')) +1;
+  END IF;
+  RETURN 0;
+END §çç§
+DELIMITER ;
+
+
+--
+DELIMITER §çç§
+CREATE OR REPLACE PROCEDURE CONCATENA(v_separator VARCHAR(1), v_chaine1 VARCHAR(200), v_chaine2 VARCHAR(200), v_chaine3 VARCHAR(200),OUT v_resultade)
+BEGIN
+  SELECT CONCAT(v_chaine1,v_separator,v_chaine2,v_separator,v_chaine2,v_separator)
+  INTO v_resultade;
+END §çç§
+DELIMITER ;
+

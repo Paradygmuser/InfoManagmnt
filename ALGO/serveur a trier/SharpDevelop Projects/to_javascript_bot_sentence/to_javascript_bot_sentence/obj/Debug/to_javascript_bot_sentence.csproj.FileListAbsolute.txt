@@ -1,0 +1,5 @@
+C:\Users\Enael\Documents\SharpDevelop Projects\to_javascript_bot_sentence\to_javascript_bot_sentence\obj\Debug\to_javascript_bot_sentence.csprojResolveAssemblyReference.cache
+C:\Users\Enael\Documents\SharpDevelop Projects\to_javascript_bot_sentence\to_javascript_bot_sentence\bin\Debug\to_javascript_bot_sentence.exe
+C:\Users\Enael\Documents\SharpDevelop Projects\to_javascript_bot_sentence\to_javascript_bot_sentence\bin\Debug\to_javascript_bot_sentence.pdb
+C:\Users\Enael\Documents\SharpDevelop Projects\to_javascript_bot_sentence\to_javascript_bot_sentence\obj\Debug\to_javascript_bot_sentence.exe
+C:\Users\Enael\Documents\SharpDevelop Projects\to_javascript_bot_sentence\to_javascript_bot_sentence\obj\Debug\to_javascript_bot_sentence.pdb

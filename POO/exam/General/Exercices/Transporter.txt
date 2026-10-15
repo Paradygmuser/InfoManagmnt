@@ -1,0 +1,23 @@
+Nous allons modéliser un avion de transport militaire (style A400M).
+Chaque avion créé possède un numéro unique (à générer automatiquement) du type: CT1, CT2, CT3...
+Cet avion peut transporter des véhicules et des palettes "transportables".
+Quoi qu'il transporte, ces "transportables" doivent pouvoir donner leur poids et la place qu'il prennent.
+Les places ont comme unité de mesure : EPP.
+L'avion transporteur peut transporter 32 EPP et peut accepter une charge maximum de 35000kg.
+On doit pouvoir ajouter tout type de matériel, pourvu qu'il soit transportable, mais nous savons qu'il y aura:
+des palettes de poids variable qui prennent 1EPP,
+des vehicules légers (LMPV) jusqu'à 4000kg qui prennent 6EPP,
+des vehicules légers blindés (LAV) jusqu'à 10000kg qui prennent 16EPP,
+des véhicules lourds (MBT) jusqu'à 32000kg qui prennent 28EPP.
+
+Les palettes, comme les véhicules possèdent un numéro de plaque unique (String, pas généré automatiquement).
+
+L'avion doit à tout moment pouvoir donner sa charge, charge possible restante, places occupées, places restantes,
+donner le contenu trié par type de matériel, par poids, par ordre d'ajout.
+
+Si on dépasse le poids ou le nombre de places, une exception (SurchargeException) doit être levée 
+précisant le matériel qui n'a pas pu être ajouté et l'avion concerné (dans un fichier log dans c:/temp/surcharges.log).
+Exemple:
+CT1:V22103 ne peut pas être chargé, poids dépassé : 36000kg
+
+

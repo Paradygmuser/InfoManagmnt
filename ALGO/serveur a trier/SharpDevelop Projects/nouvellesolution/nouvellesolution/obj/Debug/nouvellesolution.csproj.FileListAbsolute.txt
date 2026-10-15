@@ -1,0 +1,5 @@
+C:\Users\Enael\Documents\SharpDevelop Projects\nouvellesolution\nouvellesolution\obj\Debug\nouvellesolution.csprojResolveAssemblyReference.cache
+C:\Users\Enael\Documents\SharpDevelop Projects\nouvellesolution\nouvellesolution\bin\Debug\nouvellesolution.exe
+C:\Users\Enael\Documents\SharpDevelop Projects\nouvellesolution\nouvellesolution\bin\Debug\nouvellesolution.pdb
+C:\Users\Enael\Documents\SharpDevelop Projects\nouvellesolution\nouvellesolution\obj\Debug\nouvellesolution.exe
+C:\Users\Enael\Documents\SharpDevelop Projects\nouvellesolution\nouvellesolution\obj\Debug\nouvellesolution.pdb

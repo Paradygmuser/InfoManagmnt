@@ -1,0 +1,5 @@
+C:\Users\Enael\Documents\SharpDevelop Projects\Combis_game\Combis_game\obj\Debug\Combis_game.csprojResolveAssemblyReference.cache
+C:\Users\Enael\Documents\SharpDevelop Projects\Combis_game\Combis_game\bin\Debug\Combis_game.exe
+C:\Users\Enael\Documents\SharpDevelop Projects\Combis_game\Combis_game\bin\Debug\Combis_game.pdb
+C:\Users\Enael\Documents\SharpDevelop Projects\Combis_game\Combis_game\obj\Debug\Combis_game.exe
+C:\Users\Enael\Documents\SharpDevelop Projects\Combis_game\Combis_game\obj\Debug\Combis_game.pdb

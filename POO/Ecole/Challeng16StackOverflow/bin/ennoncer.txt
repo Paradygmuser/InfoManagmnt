@@ -1,0 +1,36 @@
+Voici le défi :
+
+On vous donne un ensemble de valeurs nominales de pièces, un ensemble correspondant de nombres maximums disponibles 
+pour chaque valeur nominale et un montant cible d'argent. Dans le fichier joint, nous avons 100 entrées.
+Votre tâche consiste à déterminer le nombre minimum de pièces nécessaires pour atteindre exactement 
+le montant cible pour chaque mise. S'il n'est pas possible d'atteindre le montant cible en utilisant les pièces disponibles, 
+renvoyez -1.
+
+Chaque valeur nominale de pièce peut être utilisée au plus le nombre de fois spécifié par son décompte.
+Vous pouvez utiliser moins que le maximum de pièces disponibles.
+L'ordre des pièces n'a pas d'importance.
+
+Chaque entrée :
+L'entrée sera constituée d'un tableau avec 3 éléments, dans cet ordre :
+    -dénominations : une liste d'entiers positifs représentant les valeurs des pièces
+    -comptes : une liste d'entiers non négatifs où counts[i] est le nombre maximal de pièces disponibles pour les dénominations[i]. Les listes de décomptes et de dénominations auront toujours la même longueur.
+    -cible : un entier positif représentant le montant d'argent que vous devez atteindre
+
+Chaque sortie :
+    -Un entier positif représentant le nombre minimum de pièces nécessaires pour totaliser le montant cible, ou -1 si cela ne peut pas être fait.
+
+Cas de test :
+
+Entrée : [[1, 5, 10], [10, 2, 1], 23]
+
+Sortie : 6
+
+Explication : Une façon d'obtenir la cible est 10 + 10 + 1 + 1 + 1 = 23, ce qui utilise 5 pièces, mais cette solution n'est pas valide. Il nécessite 2 pièces d'une valeur nominale de 10, mais une seule pièce de ce type est disponible. La solution utilisant le plus petit nombre de pièces disponibles est 10 + 5 + 5 + 1 + 1 + 1 = 23, qui utilise 6 pièces et respecte toutes les limites.
+
+Soumission finale :
+
+S'appuyant sur les 100 entrées du fichier joint, veuillez fournir:
+Un seul tableau contenant vos 100 sorties entières (par exemple, [6, 14, -1...]).
+Le code utilisé pour résoudre le défi.
+
+Une brève description de votre approche et de tous les obstacles intéressants que vous avez rencontrés.

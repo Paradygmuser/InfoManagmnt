@@ -1,0 +1,6 @@
+/Users/emac/Documents/formation/Principe d'algo/DEvoir teams/racine carée/racine carée/obj/Debug/racine carée.csproj.AssemblyReference.cache
+/Users/emac/Documents/formation/Principe d'algo/DEvoir teams/racine carée/racine carée/obj/Debug/racine carée.csproj.CoreCompileInputs.cache
+/Users/emac/Documents/formation/Principe d'algo/DEvoir teams/racine carée/racine carée/bin/Debug/racine_carée.exe
+/Users/emac/Documents/formation/Principe d'algo/DEvoir teams/racine carée/racine carée/bin/Debug/racine_carée.pdb
+/Users/emac/Documents/formation/Principe d'algo/DEvoir teams/racine carée/racine carée/obj/Debug/racine_carée.exe
+/Users/emac/Documents/formation/Principe d'algo/DEvoir teams/racine carée/racine carée/obj/Debug/racine_carée.pdb

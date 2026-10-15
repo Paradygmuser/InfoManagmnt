@@ -1,0 +1,5 @@
+C:\Users\Enael\Documents\SharpDevelop Projects\trycatch\trycatch\bin\Debug\trycatch.exe
+C:\Users\Enael\Documents\SharpDevelop Projects\trycatch\trycatch\bin\Debug\trycatch.pdb
+C:\Users\Enael\Documents\SharpDevelop Projects\trycatch\trycatch\obj\Debug\trycatch.csprojResolveAssemblyReference.cache
+C:\Users\Enael\Documents\SharpDevelop Projects\trycatch\trycatch\obj\Debug\trycatch.exe
+C:\Users\Enael\Documents\SharpDevelop Projects\trycatch\trycatch\obj\Debug\trycatch.pdb

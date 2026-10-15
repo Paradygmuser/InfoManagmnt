@@ -1,0 +1,5 @@
+C:\Users\Enael\Documents\SharpDevelop Projects\test de jeux\test de jeux\bin\Debug\test de jeux.exe
+C:\Users\Enael\Documents\SharpDevelop Projects\test de jeux\test de jeux\bin\Debug\test de jeux.pdb
+C:\Users\Enael\Documents\SharpDevelop Projects\test de jeux\test de jeux\obj\Debug\test de jeux.csprojResolveAssemblyReference.cache
+C:\Users\Enael\Documents\SharpDevelop Projects\test de jeux\test de jeux\obj\Debug\test de jeux.exe
+C:\Users\Enael\Documents\SharpDevelop Projects\test de jeux\test de jeux\obj\Debug\test de jeux.pdb

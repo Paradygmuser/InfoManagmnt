@@ -1,0 +1,33 @@
+un index permet d'optimisé les instructions de recherche sur un attribut indexé?
+tout suppression ou insertion de donné engendre un operation supplementaire donc l'index n'optimise pas l'insertion de donné.
+
+donc l'index permet d'acceleré les recherche a condition que les attributs soi indexé.
+
+on peut supprimé un index pour gagné de la place.
+
+on peut crée un index sur un seul table a la fois, mais il peux avoir plusieur attribut.
+
+ASC est par default.
+donc il optimise les SEMEct (leur rapiditié et donc les frequence de recherche)
+
+LES VUES
+_________
+
+permet de reduire l'appel manuel des tables compliqué.
+CREAT VIEW Villes AS SELECT DISTINCT ville FROM Employe;
+ce n'est pas une table de base, mais une reference a ces donnée.
+
+si on veux constitué une cléf primaire de deux attribut on ne pas le faire inline
+numrodept INT PRIMARY KEY,
+nssdirecteur int xxx PRIMARIKEY(tres mauvais),
+
+mais out line donc a la fin de la creation de la table
+numrodept INT ,
+nssdirecteur int,
+...(on est en dehor de la ligne donc out line)
+PRIMARY KEY (numerodetp,nssdirecteur);
+
+meme si on declare pas le mysql va crée une clef primaire virtuel
+
+on peux avoir plusieur clef etrangere dans un meme table en referecne a dautre table ou a sa propre table
+

@@ -1,0 +1,6 @@
+/Users/emac/Documents/formation/Principe d'algo/DEvoir teams/Euromilion/Euromilion/obj/Debug/Euromilion.csproj.AssemblyReference.cache
+/Users/emac/Documents/formation/Principe d'algo/DEvoir teams/Euromilion/Euromilion/obj/Debug/Euromilion.csproj.CoreCompileInputs.cache
+/Users/emac/Documents/formation/Principe d'algo/DEvoir teams/Euromilion/Euromilion/bin/Debug/Euromilion.exe
+/Users/emac/Documents/formation/Principe d'algo/DEvoir teams/Euromilion/Euromilion/bin/Debug/Euromilion.pdb
+/Users/emac/Documents/formation/Principe d'algo/DEvoir teams/Euromilion/Euromilion/obj/Debug/Euromilion.exe
+/Users/emac/Documents/formation/Principe d'algo/DEvoir teams/Euromilion/Euromilion/obj/Debug/Euromilion.pdb

@@ -1,0 +1,6 @@
+/Users/emac/Documents/formation/Principe d'algo/DEvoir teams/test4/test4/bin/Debug/test4.exe
+/Users/emac/Documents/formation/Principe d'algo/DEvoir teams/test4/test4/bin/Debug/test4.pdb
+/Users/emac/Documents/formation/Principe d'algo/DEvoir teams/test4/test4/obj/Debug/test4.csproj.AssemblyReference.cache
+/Users/emac/Documents/formation/Principe d'algo/DEvoir teams/test4/test4/obj/Debug/test4.csproj.CoreCompileInputs.cache
+/Users/emac/Documents/formation/Principe d'algo/DEvoir teams/test4/test4/obj/Debug/test4.exe
+/Users/emac/Documents/formation/Principe d'algo/DEvoir teams/test4/test4/obj/Debug/test4.pdb

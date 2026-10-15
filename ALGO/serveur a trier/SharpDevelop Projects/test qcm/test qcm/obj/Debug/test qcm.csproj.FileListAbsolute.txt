@@ -1,0 +1,5 @@
+C:\Users\Enael\Documents\SharpDevelop Projects\test qcm\test qcm\bin\Debug\test qcm.exe
+C:\Users\Enael\Documents\SharpDevelop Projects\test qcm\test qcm\bin\Debug\test qcm.pdb
+C:\Users\Enael\Documents\SharpDevelop Projects\test qcm\test qcm\obj\Debug\test qcm.csprojResolveAssemblyReference.cache
+C:\Users\Enael\Documents\SharpDevelop Projects\test qcm\test qcm\obj\Debug\test qcm.exe
+C:\Users\Enael\Documents\SharpDevelop Projects\test qcm\test qcm\obj\Debug\test qcm.pdb

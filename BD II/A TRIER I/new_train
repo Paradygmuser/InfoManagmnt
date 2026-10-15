@@ -1,0 +1,159 @@
+# FUNCTION f_ListEmp
+# /*
+# Créez une fonction qui produit une chaine de caractères reprenant les prénoms et noms des employés appartenant à un département donné, 
+le tout séparé par des virgules.
+# 
+# Points d’attention :
+# --------------------
+#   a. La fonction doit renvoyer un NULL si la liste de noms est vide ou si le numéro de département n’est pas connu.
+#   b.	Evitez d’avoir une virgule seule en début ou fin de liste.
+# */
+# 
+# -- Résultat attendu
+# -------------------
+# 
+# SELECT f_ListEmp(5);
+# +--------------------------------------------------------------+
+# | f_ListEmp(5)                                                 |
+# +--------------------------------------------------------------+
+# | Jean Dupont, Roger Durand, Morgane Massart, Frederic Lacroix |
+# +--------------------------------------------------------------+
+# 1 row in set (0.010 sec)
+# 
+# SELECT f_ListEmp(1);
+# +-----------------+
+# | f_ListEmp(1)    |
+# +-----------------+
+# | James Vermeulen |
+# +-----------------+
+# 1 row in set (0.001 sec)
+# 
+# SELECT f_ListEmp(0); -- Le département numéro "0" n'éxistant pas, la fonction renvoit NULL.
+# +--------------+
+# | f_ListEmp(0) |
+# +--------------+
+# | NULL         |
+# +--------------+
+# 1 row in set (0.000 sec) 
+
+DELIMITER §çç§
+CREATE OR REPLACE FUNCTION f_ListEmp (v_departement INTEGER)
+RETURNS CHAR(255)
+BEGIN
+  DECLARE v_nom CHAR(255) DEFAULT '';
+  DECLARE v_prenom CHAR(255) DEFAULT '';
+  DECLARE v_result CHAR(255) DEFAULT '';
+  DECLARE v_null BOOL DEFAULT FALSE;
+  DECLARE c_pointeur CURSOR FOR SELECT nom,prenom FROM Employe WHERE deptnr=v_departement;
+  DECLARE CONTINUE HANDLER FOR NOT FOUND SET v_null=TRUE;
+  
+  OPEN c_pointeur;
+  laloop: LOOP
+    FETCH c_pointeur INTO v_nom,v_prenom;
+    IF v_null THEN LEAVE laloop;
+    END IF;
+    SET v_result = CONCAT(v_result,',',v_nom,' ',v_prenom);    
+  END LOOP laloop;
+  CLOSE c_pointeur;
+  IF v_result = ''
+    THEN SET v_result='NULL';
+  END IF;
+  RETURN v_result;
+END §çç§
+DELIMITER ;
+
+# FUNCTION f_PRIME
+# /* En tant que gestionnaire de la base de données Fil Rouge, 
+il vous est demandé de calculer une prime pour chaque
+directeur de département. Sachant qu'elle doit correspondre à 
+son salaire multiplié par le nombre de décennie (1 décennie = 10 ans) 
+depuis ses 18 ans jusqu'à aujourd'hui.
+# En d'autres mots, si un directeur gagne 50000 € 
+et a aujourd'hui 55 ans, il a donc complété 3 décennie 
+(55-18=37 années c-à-d 3 décennies), 
+sa prime s'élèvera à 50000 x 3 = 150000 €.
+# 
+# Veuillez programmer une fonction de calcul de prime 
+et montrez qu'elle peut être utilisée 
+au sein d'une requête SQL qui affichera un résultat 
+sous la forme d'un seul tableau. Veuillez donc fournir 
+le code de votre fonction et l'instruction utilisée 
+pour afficher le tableau demandé.
+# nss 	Nom 	Prenom	Age 	Prime
+# 888665555 	Vermeulen 	James 	90 	385000
+# 987654321 	Materne 	Stéphanie 	87 	258000
+# */
+DELIMITER §çç§
+CREATE OR REPLACE FUNCTION prime_calc(e_naissance DATE,e_salaire INT) -- je commence par la creation de la fonction de calcul qui atd en parametre formelle la date de naissance et l'employe.
+RETURNS INT
+BEGIN
+  DECLARE v_age INT DEFAULT 0;
+  SELECT TIMESTAMPDIFF(year,e_naissance,NOW()) INTO v_age;
+  RETURN e_salaire*v_age;  
+END §çç§
+DELIMITER ;
+
+PREPARE estimationprime FROM 'SELECT nss, E.nom, prenom, prime_calc(datenaissance,salaire) AS prime FROM employe E JOIN departement ON deptnr=numerodept WHERE nss=nssdirecteur';
+EXECUTE estimationprime ;
+DEALLOCATE PREPARE estimationprime;
+
+ /*
+# Créez une procédure qui crée ou met à jour une table « Results », détaillée ci-dessous, sur base d’une liste de noms de département fournis en paramètre. 
+La table « Results » contient trois attributs :
+#   a.	Id : Clé primaire assurant l’unicité de chaque enregistrement ;
+#   b.  LaDate : Date d'insertion
+#   c.	NomDept : Nom du département
+#   d.	ListeEmployes : Chaine de caractères avec les prénoms et noms des employés le tout séparé par des virgules.
+# */
+# 
+# -- Résultat attendu
+# CALL p_listemp(' Recherche');
+# Query OK, 0 rows affected (0.00 sec)
+# 
+# CALL p_listemp('Administration,Recherche');
+# Query OK, 1 row affected (1.76 sec)
+# 
+# SELECT * FROM Results;
+# +----+---------------------+----------------+----------------------------------------------------------------+
+# | id | LaDate              | NomDept        | ListeEmployes                                                  |
+# +----+---------------------+----------------+----------------------------------------------------------------+
+# |  1 | 2019-05-14 11:59:12 | Recherche      | Jean Dupont, Roger Durand, Morgane Massart, Frédéric Lacroix   |
+# |  2 | 2019-05-14 11:59:12 | Administration | Stéphanie Materne, François Feraux, Alice Garet                |
+# +----+---------------------+----------------+----------------------------------------------------------------+
+# 2 rows in set (0.00 sec)
+# 
+# CALL p_listemp('Administration,Recherche');
+# Query OK, 1 row affected (0.47 sec)
+# 
+# mysql> SELECT * FROM Results;
+# +----+---------------------+----------------+----------------------------------------------------------------+
+# | id | LaDate              | NomDept        | ListeEmployes                                                  |
+# +----+---------------------+----------------+----------------------------------------------------------------+
+# |  1 | 2019-05-14 11:59:12 | Recherche      | Jean Dupont, Roger Durand, Morgane Massart, Frédéric Lacroix   |
+# |  2 | 2019-05-14 11:59:12 | Administration | Stéphanie Materne, François Feraux, Alice Garet                |
+# |  3 | 2019-05-14 11:59:29 | Recherche      | Jean Dupont, Roger Durand, Morgane Massart, Frédéric Lacroix   |
+# |  4 | 2019-05-14 11:59:30 | Administration | Stéphanie Materne, François Feraux, Alice Garet                |
+# +----+---------------------+----------------+----------------------------------------------------------------+
+# 
+# CALL p_listemp('Quartiers Généraux');
+# Query OK, 1 row affected (0.47 sec)
+# 
+# mysql> SELECT * FROM Results;
+# +----+---------------------+----------------------+----------------------------------------------------------------+
+# | id | LaDate              | NomDept              | ListeEmployes                                                  |
+# +----+---------------------+----------------------+----------------------------------------------------------------+
+# |  1 | 2019-05-14 11:59:12 | Recherche            | Jean Dupont, Roger Durand, Morgane Massart, Frédéric Lacroix   |
+# |  2 | 2019-05-14 11:59:12 | Administration       | Stéphanie Materne, François Feraux, Alice Garet                |
+# |  3 | 2019-05-14 11:59:29 | Recherche            | Jean Dupont, Roger Durand, Morgane Massart, Frédéric Lacroix   |
+# |  4 | 2019-05-14 11:59:30 | Administration       | Stéphanie Materne, François Feraux, Alice Garet                |
+# |  5 | 2019-05-14 12:00:30 | Quartiers Généraux   | James Vermeulen                                                |
+# +----+---------------------+----------------------+----------------------------------------------------------------+
+# 5 rows in set (0.00 sec)
+
+DELIMITER §çç§
+CREATE PROCEDURE p_listemp(l_departement VARCHAR(255))
+BEGIN
+  IF LENGTH(l_departement)>0 AND SELECT ASCII(l_departement) BETWEEN 65 AND 90 OR 
+END §çç§
+DELIMITER ;
+

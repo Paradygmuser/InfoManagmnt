@@ -1,0 +1,6 @@
+/Users/emac/Documents/formation/Principe d'algo/DEvoir teams/paldinrdrome/back/bin/Debug/back.exe
+/Users/emac/Documents/formation/Principe d'algo/DEvoir teams/paldinrdrome/back/bin/Debug/back.pdb
+/Users/emac/Documents/formation/Principe d'algo/DEvoir teams/paldinrdrome/back/obj/Debug/back.csproj.AssemblyReference.cache
+/Users/emac/Documents/formation/Principe d'algo/DEvoir teams/paldinrdrome/back/obj/Debug/back.csproj.CoreCompileInputs.cache
+/Users/emac/Documents/formation/Principe d'algo/DEvoir teams/paldinrdrome/back/obj/Debug/back.exe
+/Users/emac/Documents/formation/Principe d'algo/DEvoir teams/paldinrdrome/back/obj/Debug/back.pdb

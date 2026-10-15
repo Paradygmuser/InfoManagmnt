@@ -1,0 +1,5 @@
+C:\Users\Enael\Documents\SharpDevelop Projects\examprepa4\examprepa4\obj\Debug\examprepa4.csprojResolveAssemblyReference.cache
+C:\Users\Enael\Documents\SharpDevelop Projects\examprepa4\examprepa4\bin\Debug\examprepa4.exe
+C:\Users\Enael\Documents\SharpDevelop Projects\examprepa4\examprepa4\bin\Debug\examprepa4.pdb
+C:\Users\Enael\Documents\SharpDevelop Projects\examprepa4\examprepa4\obj\Debug\examprepa4.exe
+C:\Users\Enael\Documents\SharpDevelop Projects\examprepa4\examprepa4\obj\Debug\examprepa4.pdb
